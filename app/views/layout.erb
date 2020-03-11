@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Games Guide</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/styles.css" />
+</head>
+<body>
+    <header class="header">
+        <div>Games Guide</div>
+        <hr/>
+    </header>
+    
+    <%= yield %>
+    
+    <footer class="footer">
+        <hr/>
+        &copy;<%=Time.new.year%> Games Guide
+    </footer>
+</body>
+</html>
