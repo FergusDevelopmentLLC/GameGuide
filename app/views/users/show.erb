@@ -37,5 +37,8 @@
                 </p>
             </div>
         </div>
+        <% if can_edit_user?(@user) %>
+        <a href="/users/<%=@user.id%>/edit">Edit</a>
+        <% end %>
     </div>
 </main>
