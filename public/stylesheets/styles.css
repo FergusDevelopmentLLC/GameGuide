@@ -22,6 +22,10 @@ main {
     margin-right: 2em;
 }
 
+.flass-message {
+    color: orange;
+}
+
 /* Forms */
 .form div {
     display: flex;
