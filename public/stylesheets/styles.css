@@ -42,13 +42,16 @@ main {
 .form div {
     display: flex;
     justify-content: flex-start;
+}
+
+.form-item {
     margin-bottom: .5em;
 }
 
 .form div label {
     min-width: 150px;
     align-self: flex-start;
-    margin-top: 5px;
+    margin-top: .2em;
 }
 
 input, textarea {
@@ -65,6 +68,40 @@ textarea {
     height: 100px;
 }
 
+.form-select-wrapper{
+    flex-direction: column;
+}
+
+.form-select-item {
+    flex-direction: row;
+    margin-bottom: .3em;
+}
+
+.form-select input{
+    margin-top: .1em;
+    margin-right: .2em;
+}
+
+form div.form-types label {
+    margin: 0;
+}
+
+form div.form-tags {
+    margin-top: 1.5em;
+}
+
+form div.form-tags label {
+    margin: 0;
+}
+
+.form-new-tag {
+    margin-bottom: 1.5em;
+}
+
 header, footer {
     background: lightcyan;
+}
+
+h1 {
+    margin-bottom: .5em;
 }
