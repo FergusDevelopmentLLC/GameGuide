@@ -9,6 +9,22 @@
 <body>
     <header class="header">
         <div>Games Guide</div>
+        <% if logged_in? %>
+            <div>Current user: <%=current_user.username%></div>
+        <% else %>
+            <div>No one is logged in</div>
+        <% end %>
+        
+        <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <% if logged_in? %>
+                <li><a href="/logout">Log out<a></li>
+            <%else%>
+                <li><a href="/login">Log in<a></li>
+                <li><a href="/signup">Sign up</a></li>
+            <% end %>
+        </ul>
+
         <hr/>
     </header>
     
