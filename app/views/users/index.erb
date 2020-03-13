@@ -1,0 +1,6 @@
+<main>
+    <h1>Users</h1>
+    <%@users.each { |user|%>
+        <div><a href="/users/<%=user.id%>"><%=user.username%></a> - <%=user.email%></div>
+    <%}%>
+</main>
