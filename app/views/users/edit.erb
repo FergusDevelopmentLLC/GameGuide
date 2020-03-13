@@ -1,0 +1,24 @@
+<main>
+    <h1>Edit user</h1>
+
+    <form action='/users/<%=@user.id%>' method="post" id="edit_form" class="form">
+        <input type='hidden' name='_method' value="patch"/>
+        <div>
+            <label for="username">User name</label>
+            <input type="text" name="user[username]" id="username" placeholder="User name" value="<%=@user.username%>" />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="user[email]" id="email" placeholder="Email" value="<%=@user.email%>" />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="user[password]" id="password" placeholder="Password" value="" />
+        </div>
+    </form>
+    <form action="/users/<%=@user.id%>" method="post" id="delete_form">
+        <input type='hidden' name='_method' value="delete" />
+    </form>
+    <input type="submit" value="Edit user" form="edit_form" />
+    <input type="submit" value="Delete user" form="delete_form">
+</main>
