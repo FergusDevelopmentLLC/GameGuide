@@ -1,0 +1,45 @@
+<main>
+    <h1>Create game</h1>
+    <form method="post" action="/games" class="form">
+        <div class="form-item">
+            <label for="name">Name</label>
+            <input type="text" name="game[name]" id="name" placeholder="Name" value="" />
+        </div>
+        <div class="form-item">
+            <label for="short_descriptiom">Short description</label>
+            <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="" />
+        </div>
+        <div class="form-item">
+            <label for="description">Description</label>
+            <textarea  name="game[description]" id="description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-item form-types">
+            <label>Type</label>
+            <div class="form-select-wrapper">
+                <%Type.all.each { |type| %>
+                    <div class="form-select-item">
+                        <div class="form-select"><input type="radio" name="game[type_id]" value="<%= type.id %>" /></div>
+                        <div><%=type.name%></div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+        <div class="form-item form-tags">
+            <label>Tags</label>
+            <div class="form-select-wrapper">
+                <%Tag.all.each { |tag| %>
+                    <div class="form-select-item">
+                        <div class="form-select"><input type="checkbox" name="game[tag_ids][]" value="<%= tag.id %>" /></div>
+                        <div><%=tag.name%></div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+        <div class="form-item form-new-tag">
+            <label for="new_tag">New tag</label>
+            <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="" />
+        </div>
+        
+        <input type="submit" value="Create game" />
+    </form>
+</main>
