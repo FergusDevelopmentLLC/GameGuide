@@ -34,9 +34,11 @@ class UsersController < ApplicationController
 
     get '/users/:id' do
         if !logged_in?
+            
             flash[:message] = "You must be logged in to see user profiles"
             redirect "/"
         else
+            @user = User.find(params[:id])
             erb :'users/show'
         end
     end

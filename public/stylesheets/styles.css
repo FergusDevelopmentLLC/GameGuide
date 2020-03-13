@@ -26,6 +26,18 @@ main {
     color: orange;
 }
 
+.show-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: .3em;
+}
+
+.show-label {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 150px;
+}
+
 /* Forms */
 .form div {
     display: flex;
