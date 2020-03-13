@@ -34,13 +34,52 @@ class UsersController < ApplicationController
 
     get '/users/:id' do
         if !logged_in?
-            flash[:message] = "You must be logged in to see user profiles"
+            flash[:message] = "You must be logged in to see user profiles."
             redirect "/"
         else
             @user = User.find(params[:id])
             erb :'users/show'
         end
     end
+
+    get "/users/:id/edit" do
+        @user = User.find(params[:id])
+        if !logged_in?
+            flash[:message] = "You must be logged in to edit your profile."
+            redirect "/"
+        else
+            if !can_edit_user?(@user)
+                flash[:message] = "You cannot edit a user profile other than your own."
+                redirect "/"
+            else
+                erb :'users/edit'
+            end
+        end
+    end
+
+    patch "/users/:id" do
+        @user = User.find(params[:id])
+        if(can_edit_user?(@user))
+            @user.update(params[:user])
+            session.clear
+            flash[:message] = "Profile updated. Please log in again."
+            redirect "/login"
+        else
+            flash[:message] = "You cannot edit a user profile other than your own."
+            redirect "/"
+        end
+    end
+
+    delete "/users/:id" do
+        @user = User.find(params[:id])
+        if(can_edit_user?(@user))
+            @user.destroy
+            session.clear
+            flash[:message] = "Account deleted. Please sign up a new account or login."
+            redirect "/"
+        end
+    end
+
 
     helpers do
         def can_edit_user?(user)
