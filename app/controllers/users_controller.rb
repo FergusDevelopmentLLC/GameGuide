@@ -1,4 +1,7 @@
+require 'rack-flash'
 class UsersController < ApplicationController
+    use Rack::Flash
+
     get '/signup' do
         session.clear
         erb :'users/new'
@@ -27,6 +30,17 @@ class UsersController < ApplicationController
     get '/logout' do
         session.clear
         redirect "/"
+    end
+
+    get '/users/:id' do
+        if !logged_in?
+            
+            flash[:message] = "You must be logged in to see user profiles"
+            redirect "/"
+        else
+            @user = User.find(params[:id])
+            erb :'users/show'
+        end
     end
 end
 
