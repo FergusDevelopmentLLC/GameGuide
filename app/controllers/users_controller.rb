@@ -80,6 +80,15 @@ class UsersController < ApplicationController
         end
     end
 
+    get "/users" do
+        if !logged_in?
+            flash[:message] = "You must be logged in to see user profiles."
+            redirect "/"
+        else
+            @users = User.all
+            erb :'users/index'
+        end
+    end
 
     helpers do
         def can_edit_user?(user)
