@@ -1,0 +1,67 @@
+<main>
+    <h1>Game Detail</h1>
+    <div class="show-wrapper">
+        <div class="show-item">
+            <div class="show-label">Name:</div>
+            <div class="show-content"><%=@game.name%></div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Short description:</div>
+            <div class="show-content"><%=@game.short_description%></div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Description:</div>
+            <div class="show-content"><%=@game.description%></div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Type:</div>
+            <div class="show-content"><%=@game.type.name%></div>
+        </div>
+        <div class="show-item show-tags">
+            <div class="show-label">Tags:</div>
+            <div class="show-content">
+                <%=@game.tag_links%>
+            </div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Add tag:</div>
+            <div>
+                <form action='/games/<%=@game.id%>' method="post" id="new_tag_form" class="form">
+                    <input type='hidden' name='_method' value="patch"/>
+                    <input type="text" name="show_new_tag" id="show_new_tag" placeholder="Add new tag" value="" />
+                    <input type="submit" value="Add tag" />
+                    <% if flash.has?(:add_tag_message) %>
+                        <div class="flass-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
+                    <% end %>
+                </form>
+            </div>
+        </div>
+        <div class="show-item show-comments">
+            <div class="show-label">Comments:</div>
+            <div>
+                <div class="show-comments-wrapper">
+                <%if @game.comments.empty?%>
+                    <div class="show-comment">This game has no comments yet, please add one.</div>
+                <%else%>
+                    <%@game.comments.each { |comment|%>
+                        <%if can_edit_comment?(comment)%>
+                        <div class="show-comment"><a href='/comments/<%=comment.id%>/edit'><em><%=comment.content%></em></a> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
+                        <% else %>
+                        <div class="show-comment"><em><%=comment.content%></em> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
+                        <%end%>
+                    <%}%>
+                <%end%>
+                </div>
+                <form action='/games/<%=@game.id%>' method="post" id="new_comment_form" class="form">
+                    <input type='hidden' name='_method' value="patch"/>
+                    <input type="text" name="show_new_comment" id="show_new_comment" placeholder="Add comment" value="" />
+                    <input type="submit" value="Add comment" />
+                    <% if flash.has?(:add_comment_message) %>
+                        <div class="flass-message" style="display:inline-block"><%=flash[:add_comment_message]%></div>
+                    <% end %>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</main>
