@@ -29,6 +29,37 @@ class GamesController < ApplicationController
         @game = Game.find(params[:id])
         erb :'/games/show'
     end
+
+    patch "/games/:id" do
+        @game = Game.find(params[:id])
+        if params[:show_new_tag]
+            if !params[:show_new_tag].empty?
+                @game.tags << Tag.create(:name => params[:show_new_tag])
+            else
+                flash[:add_tag_message] = "Please enter a tag."
+            end
+            redirect "/games/#{@game.id}"
+        end
+        if params[:show_new_comment]
+            if !params[:show_new_comment].empty?
+                new_comment = Comment.new(:content => params[:show_new_comment])
+                new_comment.user = current_user
+                @game.comments << new_comment
+            else
+                flash[:add_comment_message] = "Please enter a comment."
+            end
+            redirect "/games/#{@game.id}"
+        end
+    end
     
+    helpers do
+        def can_edit_comment?(comment)
+            if (current_user.id == comment.id)
+                true
+            else
+                false
+            end
+        end
+    end
 end
 

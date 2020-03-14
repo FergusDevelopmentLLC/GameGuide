@@ -38,6 +38,10 @@ main {
     min-width: 150px;
 }
 
+.show-tags, .show-comments {
+    margin-top: 1.5em;
+}
+
 /* Forms */
 .form div {
     display: flex;
@@ -100,6 +104,14 @@ form div.form-tags label {
 
 header, footer {
     background: lightcyan;
+}
+
+.show-comments-wrapper {
+    margin-bottom: .5em;
+}
+
+.show-comment {
+    margin: 0 0 .5em 0;
 }
 
 h1 {
