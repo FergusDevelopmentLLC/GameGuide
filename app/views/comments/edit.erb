@@ -1,0 +1,16 @@
+<main>
+    <h1>Edit comment</h1>
+    <form action='/comments/<%=@comment.id%>' method="post" id="edit_form" class="form">
+        <input type='hidden' name='_method' value="patch"/>
+        <div class="form-item form-comment-edit">
+            <input type="text" name="comment[content]" id="content" placeholder="Comment" value="<%=@comment.content%>" />
+            <div>
+                <input type="submit" value="Edit comment" form="edit_form" /> <input type="submit" value="Delete comment" form="delete_form">
+            </div>
+        </div>
+    </form>
+    <form action="/comments/<%=@comment.id%>" method="post" id="delete_form">
+        <input type='hidden' name='_method' value="delete" />
+    </form>
+    
+</main>

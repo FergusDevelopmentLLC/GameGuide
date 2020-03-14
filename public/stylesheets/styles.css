@@ -110,6 +110,19 @@ header, footer {
     margin-bottom: .5em;
 }
 
+.form-comment-edit {
+    flex-direction: column;
+}
+
+.form-comment-edit input[type="text"] {
+    max-width: 300px;
+    margin-bottom: .5em;
+}
+
+.form-comment-edit input[type="submit"] {
+    margin-right: .5em;
+}
+
 .show-comment {
     margin: 0 0 .5em 0;
 }
