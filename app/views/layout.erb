@@ -17,15 +17,15 @@
         
         <ul class="nav">
             <li><a href="/">Home</a></li>
+            <li><a href="/types">Game types<a></li>
+            <li><a href="/games">All Games<a></li>
+            <li><a href="/tags">Game Tags<a></li>
             <% if logged_in? %>
-                
                 <li><a href="/users">Users<a></li>
-                <li><a href="/logout">Log out<a></li>
+                <li><a href="/logout">Log Out<a></li>
             <%else%>
-                <li><a href="/games">Games<a></li>
-                <li><a href="/tags">Tags<a></li>
-                <li><a href="/login">Log in<a></li>
-                <li><a href="/signup">Sign up</a></li>
+                <li><a href="/login">Log In<a></li>
+                <li><a href="/signup">Sign Up</a></li>
             <% end %>
         </ul>
 
