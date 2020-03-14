@@ -56,7 +56,7 @@ class GamesController < ApplicationController
     
     helpers do
         def can_edit_comment?(comment)
-            if (current_user.id == comment.id)
+            if (current_user.id == comment.user.id)
                 true
             else
                 false
