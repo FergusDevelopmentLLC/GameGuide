@@ -7,9 +7,9 @@ class TypesController < ApplicationController
         erb :'types/index'
     end
 
-    # get '/types/:id' do
-    #     @type = Type.find(params[:id])
-    #     erb :'types/show'
-    # end
+    get '/types/:id' do
+        @type = Type.find(params[:id])
+        erb :'types/show'
+    end
 
 end

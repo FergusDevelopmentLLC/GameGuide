@@ -1,0 +1,10 @@
+<main>
+    <h1><%=@type.name%> games</h1>
+    <% if !@type.games.empty? %>
+    <%@type.games.each { |game|%>
+        <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
+    <%}%>
+    <% else %>
+        <div>No games yet</div>
+    <% end %>
+</main>
