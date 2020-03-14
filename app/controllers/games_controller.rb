@@ -54,6 +54,12 @@ class GamesController < ApplicationController
         end
     end
     
+
+    get "/games" do
+        @games = Game.all
+        erb :'games/index'
+    end
+
     helpers do
         def can_edit_comment?(comment)
             if (current_user.id == comment.user.id)
