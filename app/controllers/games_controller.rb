@@ -34,7 +34,9 @@ class GamesController < ApplicationController
         @game = Game.find(params[:id])
         if params[:show_new_tag]
             if !params[:show_new_tag].empty?
-                @game.tags << Tag.create(:name => params[:show_new_tag])
+                new_tag = Tag.new(:name => params[:show_new_tag])
+                new_tag.user = current_user
+                @game.tags << new_tag
             else
                 flash[:add_tag_message] = "Please enter a tag."
             end
