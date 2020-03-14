@@ -1,5 +1,5 @@
 require 'rack-flash'
-class UsersController < ApplicationController
+class TagsController < ApplicationController
     use Rack::Flash
 
     get '/tags' do
