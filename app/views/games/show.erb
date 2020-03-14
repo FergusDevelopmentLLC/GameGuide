@@ -1,4 +1,7 @@
 <main>
+    <% if flash.has?(:message) %>
+        <div class="flash-message"><%=flash[:message]%></div>
+    <% end %>
     <h1>Game Detail</h1>
     <div class="show-wrapper">
         <div class="show-item">
@@ -29,7 +32,8 @@
             <div>
                 <form action='/games/<%=@game.id%>' method="post" id="new_tag_form" class="form">
                     <input type='hidden' name='_method' value="patch"/>
-                    <input type="text" name="show_new_tag" id="show_new_tag" placeholder="Add new tag" value="" />
+                    <input type='hidden' name='show_new_tag' value="true"/>
+                    <input type="text" name="new_tag" id="new_tag" placeholder="Add new tag" value="" />
                     <input type="submit" value="Add tag" />
                     <% if flash.has?(:add_tag_message) %>
                         <div class="flash-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
