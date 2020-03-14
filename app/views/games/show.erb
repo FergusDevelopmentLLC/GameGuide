@@ -64,8 +64,10 @@
                     <% end %>
                 </form>
                 <% end %>
-            </div> 
+            </div>
         </div>
-        
+        <%if logged_in? && can_edit_game?(@game)%>
+            <a href='/games/<%=@game.id%>/edit'>Edit game</a>
+        <%end%>
     </div>
 </main>

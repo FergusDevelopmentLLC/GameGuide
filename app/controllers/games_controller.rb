@@ -68,6 +68,13 @@ class GamesController < ApplicationController
                 false
             end
         end
+        def can_edit_game?(game)
+            if (current_user.id == game.user.id)
+                true
+            else
+                false
+            end
+        end
     end
 end
 
