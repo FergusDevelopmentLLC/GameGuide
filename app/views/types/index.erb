@@ -1,0 +1,6 @@
+<main>
+    <h1>Game Types</h1>
+    <%@types.each { |type|%>
+        <div><a href="/types/<%=type.id%>"><%=type.name%></a> - <%=type.game_count_display%></div>
+    <%}%>
+</main>
