@@ -1,0 +1,48 @@
+<main>
+    <h1>Edit game</h1>
+    <form method="post" action="/games/<%=@game.id%>" class="form">
+        <input type='hidden' name='_method' value="patch"/>
+        <div class="form-item">
+            <label for="name">Name:</label>
+            <input type="text" name="game[name]" id="name" placeholder="Name" value="<%=@game.name%>" />
+        </div>
+        <div class="form-item">
+            <label for="short_descriptiom">Short description:</label>
+            <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="<%=@game.short_description%>" />
+        </div>
+        <div class="form-item">
+            <label for="description">Description:</label>
+            <textarea  name="game[description]" id="description" placeholder="Description"><%=@game.description%></textarea>
+        </div>
+        <div class="form-item form-types">
+            <label>Type:</label>
+            <div class="form-select-wrapper">
+                <%Type.all.each { |type| %>
+                    <div class="form-select-item">
+                        <div class="form-select"><input type="radio" name="game[type_id]" value="<%= type.id %>" <%= if @game.type_id == type.id then "checked" end %> /></div>
+                        <div><%=type.name%></div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+        <div class="form-item form-tags">
+            <label>Tags:</label>
+            <div class="form-select-wrapper">
+                <%Tag.all.each { |tag| %>
+                    <div class="form-select-item">
+                        <div class="form-select"><input type="checkbox" name="game[tag_ids][]" value="<%= tag.id %>" <%= if @game.tag_ids.include?(tag.id) then "checked" end %> /></div>
+                        <div><%=tag.name%></div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+        <div class="form-item form-new-tag">
+            <label for="new_tag">New tag:</label>
+            <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="" />
+            <% if flash.has?(:add_tag_message) %>
+                <div class="flash-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
+            <% end %>
+        </div>
+        <input type="submit" value="Edit game" />
+    </form>
+</main>
