@@ -46,7 +46,7 @@
                     <div class="show-comment">This game has no comments yet.</div>
                 <%else%>
                     <%@game.comments.each { |comment|%>
-                        <%if can_edit_comment?(comment)%>
+                        <%if logged_in? && can_edit_comment?(comment)%>
                         <div class="show-comment"><a href='/comments/<%=comment.id%>/edit'><em><%=comment.content%></em></a> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
                         <% else %>
                         <div class="show-comment"><em><%=comment.content%></em> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
