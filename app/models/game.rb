@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
     belongs_to :user
     belongs_to :type
-    has_many :comments
-    has_many :game_tags
-    has_many :tags, through: :game_tags
+    has_many :comments, dependent: :destroy
+    has_many :game_tags, dependent: :destroy
+    has_many :tags, through: :game_tags, dependent: :destroy
 
     def tag_links
         if(self.tags.empty?)
