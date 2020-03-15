@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
 
     def tag_links
         if(self.tags.empty?)
-            "No tags yet"
+            "This game has no tags yet."
         else
             self.tags.map {|tag| "<a href='/tags/#{tag.id}'>#{tag.name}</a>"}.join(", ")
         end
