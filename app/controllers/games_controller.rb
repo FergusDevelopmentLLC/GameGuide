@@ -15,14 +15,31 @@ class GamesController < ApplicationController
         @game = Game.new(params[:game])
         @game.user = current_user
 
-        if !params[:new_tag].empty?
-            @game.tags << Tag.create(:name => params[:new_tag])
-        end
+        if @game.save()
         
+            if params[:tag_ids]
+                params[:tag_ids].each {|tag_id|
+                    tag = Tag.find(tag_id)
+                    #cant user @game << tag here because need user_id on the GameTagUser record
+                    GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                }
+            end
+            
+            if !params[:new_tag].empty?
+                tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+                if !@game.tags.include?(tag)
+                    #cant user @game << tag here because need user_id on the GameTagUser record
+                    GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                end
+            end
+        
+        end
+
         if @game.save
             flash[:message] = "Game saved."
             redirect "/games/#{@game.id}"
         end
+    
     end
 
     get '/games/:id' do
@@ -44,24 +61,49 @@ class GamesController < ApplicationController
             end
         elsif params[:show_new_tag] #user is adding a tag to a game, from game show page
             if !params[:new_tag].empty?
-                tag = Tag.find_or_initialize_by(:name => params[:new_tag].downcase)
-                if(!tag.user) then tag.user = current_user end #if this is not an existing tag, assign current_user
-                if(!@game.tags.include?(tag)) then @game.tags << tag end
-                flash[:message] = "Thank you for adding a tag."
+                tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+                if !@game.tags.include?(tag)
+                    #cant user @game << tag here because need user_id on the GameTagUser record
+                    GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                    flash[:message] = "Thank you for adding a tag."
+                else
+                    flash[:message] = "Game already has this tag."
+                end
             else
                 flash[:add_tag_message] = "Please enter a tag."
             end
-        else #will get here from game edit, user is updatomg a game
-            if !params[:game][:tag_ids]
-                @game.tags.clear
-            end
+        else #will get here from game edit, user is updating a game
+            
             if @game.update(params[:game]) 
-                if !params[:new_tag].empty?
-                    tag = Tag.find_or_initialize_by(:name => params[:new_tag].downcase)
-                    if(!tag.user) then tag.user = current_user end #if this is not an existing tag, assign current_user
-                    if(!@game.tags.include?(tag)) then @game.tags << tag end
+                
+                if !params[:tag_ids]
+                    @game.tags.clear
+                else
+                    params[:tag_ids].each {|tag_id|
+                        tag = Tag.find(tag_id)
+                        if !@game.tags.include?(tag)
+                            #cant user @game << tag here because need user_id on the GameTagUser record
+                            GameTagUser.create(:game => @game, :tag => tag, :user => current_user)   
+                        end
+                    }
                 end
-                flash[:message] = "Game updated successfully."
+
+                if !params[:new_tag].empty?
+                    tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+                    
+                    if !@game.tags.include?(tag)
+                        gtu = GameTagUser.new
+                        gtu.tag = tag
+                        gtu.user = current_user
+                        gtu.game = @game
+                        gtu.save
+                    end
+                end
+
+                if @game.save
+                    flash[:message] = "Game updated successfully."
+                end
+
             end
         end
         redirect "/games/#{@game.id}"
@@ -75,6 +117,15 @@ class GamesController < ApplicationController
     get '/games/:id/edit' do
         @game = Game.find(params[:id])
         erb :'/games/edit'
+    end
+
+    delete '/games/:id' do
+        @game = Game.find(params[:id])
+        @game.destroy
+        #delete any orphaned tags as a result
+        Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
+        flash[:message] = "Game deleted."
+        redirect "/games"
     end
 
     helpers do

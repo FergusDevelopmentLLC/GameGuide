@@ -74,6 +74,8 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         if(can_edit_user?(@user))
             @user.destroy
+            #delete any orphaned tags as a result
+            Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
             session.clear
             flash[:message] = "Account deleted. Please sign up a new account or login."
             redirect "/"

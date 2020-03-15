@@ -29,7 +29,7 @@
             <div class="form-select-wrapper">
                 <%Tag.all.each { |tag| %>
                     <div class="form-select-item">
-                        <div class="form-select"><input type="checkbox" name="game[tag_ids][]" value="<%= tag.id %>" /></div>
+                        <div class="form-select"><input type="checkbox" name="[tag_ids][]" value="<%= tag.id %>" /></div>
                         <div><%=tag.name%></div>
                     </div>
                 <%}%>

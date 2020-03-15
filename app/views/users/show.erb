@@ -30,7 +30,7 @@
                 <% if @user.tags.empty?%>
                     No tags yet
                 <% else %>
-                    <% @user.tags.each {|tag|%>
+                    <% @user.tags.uniq.each {|tag|%>
                        <a href="/tags/<%= tag.id %>"><%= tag.name %></a><br/>
                     <% } %>
                 <% end %>
