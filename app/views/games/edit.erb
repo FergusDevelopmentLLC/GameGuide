@@ -1,6 +1,6 @@
 <main>
     <h1>Edit game</h1>
-    <form method="post" action="/games/<%=@game.id%>" class="form">
+    <form method="post" action="/games/<%=@game.id%>" id="edit_form" class="form">
         <input type='hidden' name='_method' value="patch"/>
         <div class="form-item">
             <label for="name">Name:</label>
@@ -25,17 +25,19 @@
                 <%}%>
             </div>
         </div>
+        <% if !Tag.all.empty? %>
         <div class="form-item form-tags">
             <label>Tags:</label>
             <div class="form-select-wrapper">
                 <%Tag.all.each { |tag| %>
                     <div class="form-select-item">
-                        <div class="form-select"><input type="checkbox" name="game[tag_ids][]" value="<%= tag.id %>" <%= if @game.tag_ids.include?(tag.id) then "checked" end %> /></div>
+                        <div class="form-select"><input type="checkbox" name="[tag_ids][]" value="<%= tag.id %>" <%= if @game.tag_ids.include?(tag.id) then "checked" end %> /></div>
                         <div><%=tag.name%></div>
                     </div>
                 <%}%>
             </div>
         </div>
+        <% end %>
         <div class="form-item form-new-tag">
             <label for="new_tag">New tag:</label>
             <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="" />
@@ -43,6 +45,10 @@
                 <div class="flash-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
             <% end %>
         </div>
-        <input type="submit" value="Edit game" />
     </form>
+    <form action="/games/<%=@game.id%>" method="post" id="delete_form">
+        <input type='hidden' name='_method' value="delete" />
+    </form>
+    <input type="submit" value="Edit game" form="edit_form" />
+    <input type="submit" value="Delete game" form="delete_form">
 </main>

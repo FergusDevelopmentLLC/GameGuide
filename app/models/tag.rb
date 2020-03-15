@@ -1,7 +1,8 @@
 class Tag < ActiveRecord::Base
-    belongs_to :user
-    has_many :game_tags
-    has_many :games, through: :game_tags, dependent: :destroy
+    
+    has_many :game_tag_users
+    has_many :games, through: :game_tag_users, dependent: :destroy
+    has_many :users, through: :game_tag_users, dependent: :destroy
 
     include Displayable::InstanceMethods
 end
