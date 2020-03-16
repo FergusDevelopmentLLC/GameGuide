@@ -77,10 +77,17 @@ class UsersController < ApplicationController
     patch "/users/:id" do
         @user = User.find(params[:id])
         if logged_in? && can_edit_user?(@user)
-            @user.update(params[:user])
-            session[:user_id] = nil
-            flash[:message] = "Profile updated. Please log in again."
-            redirect "/login"
+            @user.username = params[:user][:username]
+            @user.email = params[:user][:email]
+            @user.password = params[:user][:password]
+            if(@user.valid?)
+                @user.save
+                session[:user_id] = nil
+                flash[:message] = "Profile updated. Please log in again."
+                redirect "/login"
+            else
+                erb :'users/edit'
+            end
         else
             flash[:message] = "You cannot edit a user profile other than your own."
             redirect "/"
