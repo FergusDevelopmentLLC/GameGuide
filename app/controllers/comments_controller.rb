@@ -18,13 +18,13 @@ class CommentsController < ApplicationController
 
             @game = Game.find(params[:game_id])
 
-            if !params[:show_new_comment].empty?
-                new_comment = Comment.new(:content => params[:show_new_comment])
+            new_comment = Comment.new(:content => params[:show_new_comment])
+            if new_comment.valid?
                 new_comment.user = current_user
                 @game.comments << new_comment
                 flash[:message] = "Thank you for adding a comment."
             else
-                flash[:add_comment_message] = "Please enter a comment."
+                flash[:add_comment_error] = "Please enter a comment."
             end
             
             redirect "/games/#{@game.id}"
@@ -38,8 +38,12 @@ class CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
         if logged_in? && can_edit_comment?(@comment)
             @comment.update(params[:comment])
-            flash[:message] = "Comment updated."
-            redirect "/games/#{@comment.game.id}"
+            if @comment.valid?
+                flash[:message] = "Comment updated."
+                redirect "/games/#{@comment.game.id}"
+            else
+                erb :'/comments/edit'
+            end
         else
             flash[:message] = "You must be logged in and owner of a comment to edit it."
             redirect "/games"

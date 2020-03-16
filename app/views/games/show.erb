@@ -63,8 +63,8 @@
                     <input type='hidden' name='game_id' value='<%=@game.id%>' />
                     <input type="text" name="show_new_comment" id="show_new_comment" placeholder="Add comment" value="" />
                     <input type="submit" value="Add comment" />
-                    <% if flash.has?(:add_comment_message) %>
-                        <div class="flash-message" style="display:inline-block"><%=flash[:add_comment_message]%></div>
+                    <% if flash.has?(:add_comment_error) %>
+                        <div class="flash-error" style="display:inline-block"><%=flash[:add_comment_error]%></div>
                     <% end %>
                 </form>
 

@@ -1,5 +1,15 @@
 <main>
     <h1>Edit comment</h1>
+    <% if @comment && @comment.errors.any? %>
+    <div class="validation_error">
+        <p><strong><%= @comment.errors.uniq.count %> <%= @comment.errors.uniq.count > 1 ? "errors" : "error"%> prohibited this comment from being saved:</strong></p>
+        <ul>
+            <% @comment.errors.full_messages.uniq.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
     <form action='/comments/<%=@comment.id%>' method="post" id="edit_form" class="form">
         <input type='hidden' name='_method' value="patch"/>
         <div class="form-item form-comment-edit">
