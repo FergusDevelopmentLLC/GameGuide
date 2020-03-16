@@ -19,6 +19,23 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+
+    def can_edit_game?(game)
+      if current_user.id == game.user.id
+        true
+      else
+        false
+      end
+    end
+
+    def can_edit_comment?(comment)
+      if current_user.id == comment.user.id
+          true
+      else
+          false
+      end
+    end
+
   end
 
 end

@@ -3,11 +3,12 @@ class CommentsController < ApplicationController
     use Rack::Flash
 
     get "/comments/:id/edit" do
-        if logged_in?
-            @comment = Comment.find(params[:id])
+        @comment = Comment.find(params[:id])
+
+        if logged_in? && can_edit_comment?(@comment)
             erb :'comments/edit'
         else
-            flash[:message] = "Please log in to comment on a game."
+            flash[:message] = "You must be logged in and owner of a comment to edit it."
             redirect "/games"
         end
     end
@@ -34,25 +35,25 @@ class CommentsController < ApplicationController
     end
     
     patch "/comments/:id" do
-        if logged_in?
-            @comment = Comment.find(params[:id])
+        @comment = Comment.find(params[:id])
+        if logged_in? && can_edit_comment?(@comment)
             @comment.update(params[:comment])
             flash[:message] = "Comment updated."
             redirect "/games/#{@comment.game.id}"
         else
-            flash[:message] = "Please log in to update a game comment."
+            flash[:message] = "You must be logged in and owner of a comment to edit it."
             redirect "/games"
         end
     end
 
     delete "/comments/:id" do
-        if logged_in?
-            @comment = Comment.find(params[:id])
+        @comment = Comment.find(params[:id])
+        if logged_in? && can_edit_comment?(@comment)
             @comment.destroy
             flash[:message] = "Comment deleted."
             redirect "/games/#{@comment.game.id}"
         else
-            flash[:message] = "Please log in to update a game comment."
+            flash[:message] = "You must be logged in and owner of a comment to edit it."
             redirect "/games"
         end
     end

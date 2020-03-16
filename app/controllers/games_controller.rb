@@ -109,25 +109,6 @@ class GamesController < ApplicationController
         flash[:message] = "Game deleted."
         redirect "/games"
     end
-
-    helpers do
-
-        def can_edit_comment?(comment)
-            if current_user.id == comment.user.id
-                true
-            else
-                false
-            end
-        end
-        
-        def can_edit_game?(game)
-            if current_user.id == game.user.id
-                true
-            else
-                false
-            end
-        end
-
-    end
+    
 end
 
