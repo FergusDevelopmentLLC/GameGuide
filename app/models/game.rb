@@ -5,6 +5,11 @@ class Game < ActiveRecord::Base
     has_many :game_tag_users, dependent: :destroy
     has_many :tags, through: :game_tag_users, dependent: :destroy
 
+    validates_presence_of :name
+    validates_presence_of :short_description
+    validates_presence_of :description
+    validates_presence_of :type
+
     def tag_links
         if(self.tags.empty?)
             "This game has no tags yet."

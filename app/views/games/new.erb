@@ -1,24 +1,34 @@
 <main>
     <h1>Create game</h1>
+    <% if @game && @game.errors.any? %>
+    <div class="validation_error">
+        <p><strong><%= @game.errors.uniq.count %> <%= @game.errors.uniq.count > 1 ? "errors" : "error"%> prohibited this game from being saved:</strong></p>
+        <ul>
+            <% @game.errors.full_messages.uniq.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
     <form method="post" action="/games" class="form">
         <div class="form-item">
             <label for="name">Name</label>
-            <input type="text" name="game[name]" id="name" placeholder="Name" value="" />
+            <input type="text" name="game[name]" id="name" placeholder="Name" value="<%= @game && @game.name %>" />
         </div>
         <div class="form-item">
             <label for="short_descriptiom">Short description</label>
-            <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="" />
+            <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="<%= @game && @game.short_description %>" />
         </div>
         <div class="form-item">
             <label for="description">Description</label>
-            <textarea  name="game[description]" id="description" placeholder="Description"></textarea>
+            <textarea  name="game[description]" id="description" placeholder="Description"><%= @game && @game.description %></textarea>
         </div>
         <div class="form-item form-types">
             <label>Type</label>
             <div class="form-select-wrapper">
                 <%Type.all.each { |type| %>
                     <div class="form-select-item">
-                        <div class="form-select"><input type="radio" name="game[type_id]" value="<%= type.id %>" /></div>
+                        <div class="form-select"><input type="radio" name="game[type_id]" value="<%= type.id %>" <%= @game && @game.type && @game.type.id == type.id ? " checked" : "" %> /></div>
                         <div><%=type.name%></div>
                     </div>
                 <%}%>

@@ -33,33 +33,36 @@ class GamesController < ApplicationController
     end
 
     post '/games' do
-        
         if logged_in?
 
             @game = Game.new(params[:game])
             @game.user = current_user
-
-            if params[:tag_ids]
-                params[:tag_ids].each {|tag_id|
-                    tag = Tag.find(tag_id)
-                    #cant user @game << tag here because need user_id on the GameTagUser record
-                    GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
-                }
-            end
             
-            if !params[:new_tag].empty?
-                tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
-                if !@game.tags.include?(tag)
-                    #cant user @game << tag here because need user_id on the GameTagUser record
-                    GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+            if @game.valid?
+            
+                @game.save
+                
+                if params[:tag_ids]
+                    params[:tag_ids].each {|tag_id|
+                        tag = Tag.find(tag_id)
+                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                    }
                 end
-            end
-            
-            if @game.save
+                
+                if !params[:new_tag].empty?
+                    tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+                    if !@game.tags.include?(tag)
+                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                    end
+                end
+
                 flash[:message] = "Game saved."
                 redirect "/games/#{@game.id}"
+            else
+                erb :'games/new'
             end
-               
         else
             flash[:message] = "You must be logged in to create a game."
             redirect "/games"
