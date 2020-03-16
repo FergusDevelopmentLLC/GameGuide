@@ -50,64 +50,38 @@ class GamesController < ApplicationController
     end
 
     patch "/games/:id" do
-        @game = Game.find(params[:id])
         
-        if params[:show_new_comment] #user is adding a comment to a game, from game show page
-            if !params[:show_new_comment].empty?
-                new_comment = Comment.new(:content => params[:show_new_comment])
-                new_comment.user = current_user
-                @game.comments << new_comment
-                flash[:message] = "Thank you for adding a comment."
-            else
-                flash[:add_comment_message] = "Please enter a comment."
+        @game = Game.find(params[:id])
+
+        if @game.update(params[:game]) 
+            
+            @game.tags.clear
+
+            if params[:tag_ids]
+                params[:tag_ids].each {|tag_id|
+                    tag = Tag.find(tag_id)
+                    if !@game.tags.include?(tag)
+                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        GameTagUser.create(:game => @game, :tag => tag, :user => current_user)   
+                    end
+                }
             end
-        elsif params[:show_new_tag] #user is adding a tag to a game, from game show page
+
             if !params[:new_tag].empty?
                 tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+                
                 if !@game.tags.include?(tag)
                     #cant user @game << tag here because need user_id on the GameTagUser record
                     GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
-                    flash[:message] = "Thank you for adding a tag."
-                else
-                    flash[:message] = "Game already has this tag."
                 end
-            else
-                flash[:add_tag_message] = "Please enter a tag."
             end
-        else #will get here from game edit, user is updating a game
-            
-            if @game.update(params[:game]) 
-                
-                if !params[:tag_ids]
-                    @game.tags.clear
-                else
-                    params[:tag_ids].each {|tag_id|
-                        tag = Tag.find(tag_id)
-                        if !@game.tags.include?(tag)
-                            #cant user @game << tag here because need user_id on the GameTagUser record
-                            GameTagUser.create(:game => @game, :tag => tag, :user => current_user)   
-                        end
-                    }
-                end
 
-                if !params[:new_tag].empty?
-                    tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
-                    
-                    if !@game.tags.include?(tag)
-                        gtu = GameTagUser.new
-                        gtu.tag = tag
-                        gtu.user = current_user
-                        gtu.game = @game
-                        gtu.save
-                    end
-                end
-
-                if @game.save
-                    flash[:message] = "Game updated successfully."
-                end
-
+            if @game.save
+                flash[:message] = "Game updated successfully."
             end
+
         end
+
         redirect "/games/#{@game.id}"
     end
 
