@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
     has_many :comments, dependent: :destroy
     has_many :game_tag_users
     has_many :tags, through: :game_tag_users, dependent: :destroy
+
+    validates :username, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true
+    validates_presence_of :password
 end

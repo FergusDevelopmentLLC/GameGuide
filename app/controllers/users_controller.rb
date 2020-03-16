@@ -13,11 +13,12 @@ class UsersController < ApplicationController
 
     post '/signup' do
         @user = User.new(params[:user])
-        if(@user.save)
+        if @user.valid?
+            @user.save
             flash[:message] = "Account created, please login with your credentials"
             redirect "/login"
         else
-            redirect "/"
+            erb :'users/new'
         end
     end
 
@@ -37,14 +38,14 @@ class UsersController < ApplicationController
             flash[:message] = "Welcome, #{@user.username}"
             redirect "/"
         else
-            flash[:message] = "User name or password incorrect"
+            flash[:error] = "User name or password incorrect"
             redirect "/login"
         end
     end
 
     get '/logout' do
         flash[:message] = "Log out successful"
-        session.clear
+        session[:user_id] = nil
         redirect "/"
     end
 
@@ -75,9 +76,9 @@ class UsersController < ApplicationController
 
     patch "/users/:id" do
         @user = User.find(params[:id])
-        if !logged_in? || !can_edit_user?(@user)
+        if logged_in? && can_edit_user?(@user)
             @user.update(params[:user])
-            session.clear
+            session[:user_id] = nil
             flash[:message] = "Profile updated. Please log in again."
             redirect "/login"
         else
@@ -92,7 +93,7 @@ class UsersController < ApplicationController
             @user.destroy
             #delete any orphaned tags as a result
             Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
-            session.clear
+            session[:user_id] = nil
             flash[:message] = "Account deleted. Please sign up a new account or login."
         else
             flash[:message] = "You must be logged in and owner of the account to delete it."
