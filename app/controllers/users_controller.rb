@@ -3,31 +3,47 @@ class UsersController < ApplicationController
     use Rack::Flash
 
     get '/signup' do
-        session.clear
-        erb :'users/new'
+        if logged_in?
+            flash[:message] = "Please log out in order to sign up with a new account"
+            redirect "/"
+        else
+            erb :'users/new'
+        end
     end
 
     post '/signup' do
         @user = User.new(params[:user])
         if(@user.save)
-            session[:user_id] = @user.id
+            flash[:message] = "Account created, please login with your credentials"
+            redirect "/login"
+        else
             redirect "/"
         end
     end
 
     get '/login' do
-        erb :'users/login'
+        if logged_in?
+            flash[:message] = "Please log out in order to login with a different account"
+            redirect "/"
+        else
+            erb :'users/login'
+        end
     end
 
     post '/login' do
         @user = User.find_by(:username => params[:user][:username])
         if(@user && @user.authenticate(params[:user][:password]))
             session[:user_id] = @user.id
+            flash[:message] = "Welcome, #{@user.username}"
+            redirect "/"
+        else
+            flash[:message] = "User name or password incorrect"
+            redirect "/login"
         end
-        redirect "/"
     end
 
     get '/logout' do
+        flash[:message] = "Log out successful"
         session.clear
         redirect "/"
     end
@@ -44,7 +60,7 @@ class UsersController < ApplicationController
 
     get "/users/:id/edit" do
         @user = User.find(params[:id])
-        if !logged_in?
+        if !logged_in? || !can_edit_user?(@user)
             flash[:message] = "You must be logged in to edit your profile."
             redirect "/"
         else
@@ -59,7 +75,7 @@ class UsersController < ApplicationController
 
     patch "/users/:id" do
         @user = User.find(params[:id])
-        if(can_edit_user?(@user))
+        if !logged_in? || !can_edit_user?(@user)
             @user.update(params[:user])
             session.clear
             flash[:message] = "Profile updated. Please log in again."
@@ -72,14 +88,16 @@ class UsersController < ApplicationController
 
     delete "/users/:id" do
         @user = User.find(params[:id])
-        if(can_edit_user?(@user))
+        if logged_in? && can_edit_user?(@user)
             @user.destroy
             #delete any orphaned tags as a result
             Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
             session.clear
             flash[:message] = "Account deleted. Please sign up a new account or login."
-            redirect "/"
+        else
+            flash[:message] = "You must be logged in and owner of the account to delete it."
         end
+        redirect "/"
     end
 
     get "/users" do
@@ -92,14 +110,5 @@ class UsersController < ApplicationController
         end
     end
 
-    helpers do
-        def can_edit_user?(user)
-            if (current_user.id == user.id)
-                true
-            else
-                false
-            end
-        end
-    end
 end
 
