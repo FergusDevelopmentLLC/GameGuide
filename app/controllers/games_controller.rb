@@ -1,4 +1,6 @@
 require 'rack-flash'
+include FileUtils::Verbose
+
 class GamesController < ApplicationController
     use Rack::Flash
     
@@ -38,6 +40,23 @@ class GamesController < ApplicationController
             @game = Game.new(params[:game])
             @game.user = current_user
             
+            @game.featured = 0
+            
+            if params[:featured]
+                @game.featured = 1
+            end
+
+            if params[:image]
+                tempfile = params[:image][:tempfile] 
+                filename = params[:image][:filename]
+
+                timestamp = Time.now.to_i
+                image_file = filename.gsub(".", "#{timestamp.to_s}.")
+                cp(tempfile.path, "public/uploads/#{image_file}")
+
+                @game.image = image_file
+            end
+
             if @game.valid?
             
                 @game.save

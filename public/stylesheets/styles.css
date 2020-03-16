@@ -92,6 +92,10 @@ textarea {
     margin-right: .2em;
 }
 
+form div.form-types {
+    margin-top: 1.5em;
+}
+
 form div.form-types label {
     margin: 0;
 }
