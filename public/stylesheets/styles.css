@@ -156,11 +156,11 @@ h1 {
     list-style-type: none;
 }
 
-.show-game-image-wrapper {
+.show-game-image-wrapper, .game-edit-current-image {
     max-width: 200px;
     margin-right: 1em;
 }
 
-.show-game-image-wrapper img {
+.show-game-image-wrapper, .game-edit-current-image img {
     border: 1px solid lightgray;
 }

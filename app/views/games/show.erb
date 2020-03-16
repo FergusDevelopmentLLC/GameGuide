@@ -22,17 +22,21 @@
         </div>
         <div class="show-item">
             <div class="show-label">Number of players:</div>
-            <div class="show-content"><%=@game.number_of_players%></div>
+            <div class="show-content"><%=!@game.number_of_players.blank? ? @game.number_of_players : "Not specified"%></div>
         </div>
         <div class="show-item">
             <div class="show-label">Play length:</div>
-            <div class="show-content"><%=@game.play_length%></div>
+            <div class="show-content"><%=!@game.play_length.blank? ? @game.play_length : "Not specified"%></div>
         </div>
         <div class="show-item">
             <div class="show-label">Image:</div>
+            <% if @game.image %>
             <div class="show-content show-game-image-wrapper">
                 <img src="../../../uploads/<%=@game.image%>"/>
             </div>
+            <% else %>
+            <div class="show-content">No image</div>
+            <% end %>
         </div>
         <div class="show-item show-type">
             <div class="show-label">Type:</div>

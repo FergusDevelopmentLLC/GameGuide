@@ -10,11 +10,15 @@
         </ul>
     </div>
     <% end %>
-    <form method="post" action="/games/<%=@game.id%>" id="edit_form" class="form">
+    <form method="post" action="/games/<%=@game.id%>" id="edit_form" class="form" enctype="multipart/form-data">
         <input type='hidden' name='_method' value="patch"/>
         <div class="form-item">
             <label for="name">Name:</label>
             <input type="text" name="game[name]" id="name" placeholder="Name" value="<%=@game.name%>" />
+        </div>
+        <div class="form-item">
+            <label for="name">Featured:</label>
+            <input type="checkbox" name="featured" id="featured" placeholder="featured" <%= if @game.featured == 1 then "checked" end %> />
         </div>
         <div class="form-item">
             <label for="short_descriptiom">Short description:</label>
@@ -23,6 +27,32 @@
         <div class="form-item">
             <label for="description">Description:</label>
             <textarea  name="game[description]" id="description" placeholder="Description"><%=@game.description%></textarea>
+        </div>
+        <div class="form-item">
+            <label for="number_of_players">Number of players:</label>
+            <input type="text" name="game[number_of_players]" id="number_of_players" placeholder="Number of players" value="<%=@game.number_of_players %>" />
+        </div>
+        <div class="form-item">
+            <label for="play_length">Play length:</label>
+            <input type="text" name="game[play_length]" id="play_length" placeholder="Play length" value="<%=@game.play_length %>" />
+        </div>
+        <div class="form-item">
+            <label for="game-edit-current-image">Current image:</label>
+            <% if @game.image %>
+            <div class="game-edit-current-image">
+                <img src="../../../uploads/<%=@game.image%>"/>
+            </div>
+            <% else %>
+            <div>No image</div>
+            <% end %>
+        </div>
+        <div class="form-item">
+            <label for="clear_image">Clear image:</label>
+            <input type="checkbox" name="clear_image" id="clear-image" />
+        </div>
+        <div class="form-item">
+            <label for="image">Or upload new:</label>
+            <input type="file" name="image" id="image" />
         </div>
         <div class="form-item form-types">
             <label>Type:</label>

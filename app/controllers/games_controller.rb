@@ -96,6 +96,27 @@ class GamesController < ApplicationController
         if logged_in? && can_edit_game?(@game)
 
             @game.update(params[:game])
+            
+            @game.featured = 0
+            
+            if params[:featured]
+                @game.featured = 1
+            end
+            
+            if params[:image] && !params[:clear_image] 
+                tempfile = params[:image][:tempfile] 
+                filename = params[:image][:filename]
+
+                timestamp = Time.now.to_i
+                image_file = filename.gsub(".", "#{timestamp.to_s}.")
+                cp(tempfile.path, "public/uploads/#{image_file}")
+
+                @game.image = image_file
+            end
+
+            if params[:clear_image]
+                @game.image = nil
+            end
 
             if @game.valid?
                     
