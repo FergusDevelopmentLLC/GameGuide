@@ -34,8 +34,8 @@
                     <input type='hidden' name='game_id' value='<%=@game.id%>' />
                     <input type="text" name="new_tag" id="new_tag" placeholder="Add new tag" value="" />
                     <input type="submit" value="Add tag" />
-                    <% if flash.has?(:add_tag_message) %>
-                        <div class="flash-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
+                    <% if flash.has?(:add_tag_error) %>
+                        <div class="flash-error" style="display:inline-block"><%=flash[:add_tag_error]%></div>
                     <% end %>
                 </form>
             </div>

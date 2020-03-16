@@ -16,20 +16,20 @@ class TagsController < ApplicationController
 
         @game = Game.find(params[:game_id])
         if logged_in?
-            if !params[:new_tag].empty?
-                tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+            tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
+            if tag.valid?
                 if !@game.tags.include?(tag)
                     #cant user @game << tag here because need user_id on the GameTagUser record
                     GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
-                    flash[:message] = "Thank you for adding a tag."
+                    flash[:message] = "Thank you for adding a tag"
                 else
-                    flash[:message] = "Game already has this tag."
+                    flash[:add_tag_error] = "Game already has this tag"
                 end
             else
-                flash[:add_tag_message] = "Please enter a tag."
+                flash[:add_tag_error] = "Please enter a tag"
             end
         else
-            flash[:message] = "You must be logged in to add a tag."
+            flash[:message] = "You must be logged in to add a tag"
         end
 
         redirect "/games/#{@game.id}"
