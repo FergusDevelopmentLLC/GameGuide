@@ -1,22 +1,22 @@
 require 'rack-flash'
 class GamesController < ApplicationController
     use Rack::Flash
-
+    
     get '/games/new' do
         if !logged_in?
-            flash[:message] = "You must be logged in to create a game."
-            redirect "/"
+            flash[:message] = "Please log in to create or edit a game."
+            redirect "/games"
         else
             erb :'games/new'
         end
     end
 
     post '/games' do
-        @game = Game.new(params[:game])
-        @game.user = current_user
-
-        if @game.save()
         
+        if logged_in?
+            @game = Game.new(params[:game])
+            @game.user = current_user
+
             if params[:tag_ids]
                 params[:tag_ids].each {|tag_id|
                     tag = Tag.find(tag_id)
@@ -32,14 +32,16 @@ class GamesController < ApplicationController
                     GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
                 end
             end
-        
+            
+            if @game.save
+                flash[:message] = "Game saved."
+                redirect "/games/#{@game.id}"
+            end
+               
+        else
+            flash[:message] = "Please log in to create or edit a game."
+            redirect "/games"
         end
-
-        if @game.save
-            flash[:message] = "Game saved."
-            redirect "/games/#{@game.id}"
-        end
-    
     end
 
     get '/games/:id' do
@@ -116,7 +118,13 @@ class GamesController < ApplicationController
 
     get '/games/:id/edit' do
         @game = Game.find(params[:id])
-        erb :'/games/edit'
+
+        if logged_in? && can_edit_game?(@game)
+            erb :'/games/edit'
+        else
+            flash[:message] = "Please log in to create or edit a game."
+            redirect "/games/#{@game.id}"
+        end
     end
 
     delete '/games/:id' do
@@ -129,6 +137,7 @@ class GamesController < ApplicationController
     end
 
     helpers do
+
         def can_edit_comment?(comment)
             if current_user.id == comment.user.id
                 true
@@ -136,6 +145,7 @@ class GamesController < ApplicationController
                 false
             end
         end
+        
         def can_edit_game?(game)
             if current_user.id == game.user.id
                 true
@@ -143,6 +153,7 @@ class GamesController < ApplicationController
                 false
             end
         end
+
     end
 end
 

@@ -1,4 +1,7 @@
 <main>
+    <% if flash.has?(:message) %>
+        <div class="flash-message"><%=flash[:message]%></div>
+    <% end %>
     <h1>Games</h1>
     <%@games.each { |game|%>
         <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
