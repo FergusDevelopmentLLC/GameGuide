@@ -5,6 +5,6 @@
         <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
     <%}%>
     <% else %>
-        <div>No games yet</div>
+        <div>No games available tagged with "<%=@tag.name%>"</div>
     <% end %>
 </main>
