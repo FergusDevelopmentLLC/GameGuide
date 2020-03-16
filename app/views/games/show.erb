@@ -9,6 +9,10 @@
             <div class="show-content"><%=@game.name%></div>
         </div>
         <div class="show-item">
+            <div class="show-label">Featured:</div>
+            <div class="show-content"><%=@game.featured == 1 ? "Featured" : "Not featured"%></div>
+        </div>
+        <div class="show-item">
             <div class="show-label">Short description:</div>
             <div class="show-content"><%=@game.short_description%></div>
         </div>
@@ -17,6 +21,20 @@
             <div class="show-content"><%=@game.description%></div>
         </div>
         <div class="show-item">
+            <div class="show-label">Number of players:</div>
+            <div class="show-content"><%=@game.number_of_players%></div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Play length:</div>
+            <div class="show-content"><%=@game.play_length%></div>
+        </div>
+        <div class="show-item">
+            <div class="show-label">Image:</div>
+            <div class="show-content show-game-image-wrapper">
+                <img src="../../../uploads/<%=@game.image%>"/>
+            </div>
+        </div>
+        <div class="show-item show-type">
             <div class="show-label">Type:</div>
             <div class="show-content"><a href='/types/<%=@game.type.id%>'><%=@game.type.name%></a></div>
         </div>
