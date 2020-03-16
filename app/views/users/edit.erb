@@ -1,6 +1,15 @@
 <main>
     <h1>Edit user</h1>
-
+    <% if @user && @user.errors.any? %>
+    <div class="validation_error">
+        <p><strong><%= @user.errors.uniq.count %> <%= @user.errors.uniq.count > 1 ? "errors" : "error"%> prohibited this user from being saved:</strong></p>
+        <ul>
+            <% @user.errors.full_messages.uniq.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
     <form action='/users/<%=@user.id%>' method="post" id="edit_form" class="form">
         <input type='hidden' name='_method' value="patch"/>
         <div class="form-item">

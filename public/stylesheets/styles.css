@@ -23,7 +23,13 @@ main {
 }
 
 .flash-message {
-    color: orange;
+    color: green;
+    margin-bottom: .5em;
+}
+
+.flash-error {
+    color: red;
+    margin-bottom: .5em;
 }
 
 .show-item {
@@ -129,4 +135,14 @@ header, footer {
 
 h1 {
     margin-bottom: .5em;
+}
+
+.validation_error {
+    margin-bottom: 1em;
+    display: inline-block;
+    color: red;
+}
+
+.validation_error ul {
+    list-style-type: none;
 }
