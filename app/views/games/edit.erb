@@ -1,5 +1,15 @@
 <main>
     <h1>Edit game</h1>
+    <% if @game && @game.errors.any? %>
+    <div class="validation_error">
+        <p><strong><%= @game.errors.uniq.count %> <%= @game.errors.uniq.count > 1 ? "errors" : "error"%> prohibited this game from being saved:</strong></p>
+        <ul>
+            <% @game.errors.full_messages.uniq.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
     <form method="post" action="/games/<%=@game.id%>" id="edit_form" class="form">
         <input type='hidden' name='_method' value="patch"/>
         <div class="form-item">
@@ -40,7 +50,7 @@
         <% end %>
         <div class="form-item form-new-tag">
             <label for="new_tag">New tag:</label>
-            <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="" />
+            <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="<%=@new_tag%>" />
             <% if flash.has?(:add_tag_message) %>
                 <div class="flash-message" style="display:inline-block"><%=flash[:add_tag_message]%></div>
             <% end %>
