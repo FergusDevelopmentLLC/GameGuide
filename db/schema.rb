@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200315182951) do
+ActiveRecord::Schema.define(version: 20200316210543) do
 
   create_table "comments", force: :cascade do |t|
     t.string  "content"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 20200315182951) do
     t.string  "description"
     t.integer "created_at"
     t.integer "updated_at"
+    t.integer "featured"
+    t.string  "number_of_players"
+    t.string  "play_length"
+    t.string  "image"
   end
 
   create_table "tags", force: :cascade do |t|

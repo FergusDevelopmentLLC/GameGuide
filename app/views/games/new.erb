@@ -10,21 +10,40 @@
         </ul>
     </div>
     <% end %>
-    <form method="post" action="/games" class="form">
+    <form method="post" action="/games" class="form"  enctype="multipart/form-data">
         <div class="form-item">
-            <label for="name">Name</label>
+            <label for="name">Name:</label>
             <input type="text" name="game[name]" id="name" placeholder="Name" value="<%= @game && @game.name %>" />
         </div>
         <div class="form-item">
-            <label for="short_descriptiom">Short description</label>
+            <label for="featured">Featured:</label>
+            <input type="checkbox" name="featured" id="featured" placeholder="featured"  />
+        </div>
+        <div class="form-item">
+            <label for="short_descriptiom">Short description:</label>
             <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="<%= @game && @game.short_description %>" />
         </div>
         <div class="form-item">
-            <label for="description">Description</label>
+            <label for="description">Description:</label>
             <textarea  name="game[description]" id="description" placeholder="Description"><%= @game && @game.description %></textarea>
         </div>
+        
+        <div class="form-item">
+            <label for="number_of_players">Number of players:</label>
+            <input type="text" name="game[number_of_players]" id="number_of_players" placeholder="Number of players" value="<%= @game && @game.number_of_players %>" />
+        </div>
+        
+        <div class="form-item">
+            <label for="play_length">Play length:</label>
+            <input type="text" name="game[play_length]" id="play_length" placeholder="Play length" value="<%= @game && @game.play_length %>" />
+        </div>
+        <div class="form-item">
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" placeholder="" value="" />
+        </div>
+        
         <div class="form-item form-types">
-            <label>Type</label>
+            <label>Type:</label>
             <div class="form-select-wrapper">
                 <%Type.all.each { |type| %>
                     <div class="form-select-item">
@@ -35,7 +54,7 @@
             </div>
         </div>
         <div class="form-item form-tags">
-            <label>Tags</label>
+            <label>Tags:</label>
             <div class="form-select-wrapper">
                 <%Tag.all.each { |tag| %>
                     <div class="form-select-item">
@@ -46,10 +65,9 @@
             </div>
         </div>
         <div class="form-item form-new-tag">
-            <label for="new_tag">New tag</label>
+            <label for="new_tag">New tag:</label>
             <input type="text" name="new_tag" id="new_tag" placeholder="New tag" value="" />
         </div>
-        
         <input type="submit" value="Create game" />
     </form>
 </main>
