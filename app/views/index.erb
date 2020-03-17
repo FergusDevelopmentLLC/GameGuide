@@ -25,7 +25,7 @@
             <div class="types">
                 <%Type.all.each { |type|%>
                 <div class="type">
-                    <h3><%=type.name%></h3>
+                    <h3><a href='/types/<%=type.id%>'><%=type.name%></a></h3>
                     <ul>
                         <%type.games.limit(3).each { |game|%>
                         <li><a href='/games/<%=game.id%>'><%=game.name%></a></li>
