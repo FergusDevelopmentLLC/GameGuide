@@ -1,20 +1,22 @@
-<main>
-    <h1>Log in</h1>
-    <% if flash.has?(:message) %>
-        <div class="flash-message"><%=flash[:message]%></div>
-    <% end %>
-    <% if flash.has?(:error) %>
-        <div class="flash-error"><%=flash[:error]%></div>
-    <% end %>
-    <form method="post" action="/login" class="form">
-        <div class="form-item">
-            <label for="username">User name</label>
-            <input type="text" name="user[username]" id="username" placeholder="User name" value="" />
-        </div>
-        <div class="form-item">
-            <label for="password">Password</label>
-            <input type="password" name="user[password]" id="password" placeholder="Password" value="" />
-        </div>
-        <input type="submit" value="Log in" />
-    </form>
-</main>
+<div class="full">
+    <main class="main">
+        <h1>Log in</h1>
+        <% if flash.has?(:message) %>
+            <div class="flash-message"><%=flash[:message]%></div>
+        <% end %>
+        <% if flash.has?(:error) %>
+            <div class="flash-error"><%=flash[:error]%></div>
+        <% end %>
+        <form method="post" action="/login" class="form">
+            <div class="form-item">
+                <label for="username">User name</label>
+                <input type="text" name="user[username]" id="username" placeholder="User name" value="" />
+            </div>
+            <div class="form-item">
+                <label for="password">Password</label>
+                <input type="password" name="user[password]" id="password" placeholder="Password" value="" />
+            </div>
+            <input type="submit" value="Log in" />
+        </form>
+    </main>
+</div>

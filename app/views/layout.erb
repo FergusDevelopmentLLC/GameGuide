@@ -4,39 +4,26 @@
     <meta charset="UTF-8">
     <title>Games Guide</title>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../../../stylesheets/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../../stylesheets/styles_04.css" />
 </head>
 <body>
     <header class="header">
-        <div>Games Guide</div>
-        <% if logged_in? %>
-            <div>Current user: <%=current_user.username%></div>
-        <% else %>
-            <div>No one is logged in</div>
-        <% end %>
-        
-        <ul class="nav">
+        <div>Game Guide</div>
+        <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/types">Game Types<a></li>
-            <li><a href="/games">All Games<a></li>
-            <li><a href="/tags">Game Tags<a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/types">Game Types</a></li>
+            <li><a href="/tags">Tags</a></li>
             <% if logged_in? %>
-                <li><a href="/users">Users<a></li>
-                <li><a href="/logout">Log Out<a></li>
-            <%else%>
-                <li><a href="/login">Log In<a></li>
-                <li><a href="/signup">Sign Up</a></li>
-            <% end %>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/logout">Logout</a></li>
+            <% else %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Signup</a></li>
+            <% end %> 
         </ul>
-
-        <hr/>
     </header>
-    
     <%= yield %>
-    
-    <footer class="footer">
-        <hr/>
-        &copy;<%=Time.new.year%> Games Guide
-    </footer>
+    <footer class="footer">&copy;<%=Time.new.year%> Board Game Tracker</footer>
 </body>
 </html>
