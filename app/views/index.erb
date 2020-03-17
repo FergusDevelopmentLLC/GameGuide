@@ -1,19 +1,18 @@
 <div class="home">
     <main class="main">
         <div class="latest-wrapper">
-            <div class="latest-details">
-                <div class="latest-img">
-                    <img src="../../../images/monopoly.jpg"/>
-                </div>
+            <div class="latest-img">
+                <img src="../../../uploads/<%=@latest_game.image%>"/>
             </div>
             <div class="latest-description">
-                <h4>Latest Game</h4>
-                <p><a href='#'>Monopoly</a> is a board game currently published by Hasbro. In the game, players roll two six-sided dice to move around the game board, buying and trading properties, and developing them with houses and hotels. Players collect rent from their opponents, with the goal being to drive them into bankruptcy.</p>
+                <h3>Latest game: <a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a></h3>
+                <h4><strong><%=@latest_game.short_description%></strong></h4>
+                <p><%=@latest_game.description%></p>
                 <ul>
-                    <li>Category: Board game</li>
-                    <li>Number of players: 4</li>
-                    <li>Play length: 5 hrs</li>
-                    <li>Published: 1950</li>
+                    <li>Type: <%=@latest_game.type.name%></li>
+                    <%if !@latest_game.number_of_players.blank?%><li>Number of players: <%=@latest_game.number_of_players%></li><%end%>
+                    <%if !@latest_game.play_length.blank?%><li>Play length: <%=@latest_game.play_length%></li><%end%>
+                    <%if !@latest_game.tags.empty?%><li><li>Tags: <%=@latest_game.tag_links%></li><%end%>
                 </ul>
             </div>
         </div>
