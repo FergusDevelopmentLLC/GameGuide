@@ -151,6 +151,9 @@ class GamesController < ApplicationController
                     Game.delete_old_featured
                 end
 
+                #delete any orphaned tags as result of game update
+                Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
+
                 flash[:message] = "Game updated successfully."
                 redirect "/games/#{@game.id}"
 
