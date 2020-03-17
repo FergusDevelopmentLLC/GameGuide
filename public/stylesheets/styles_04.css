@@ -77,7 +77,7 @@ body {
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     text-align: right;
-    padding: .5em 4em .5em 0;
+    padding: .3em 1em .3em 0;
 }
 
 .header div {
@@ -114,7 +114,7 @@ body {
     grid-area: main;
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
-    padding: .75em;
+    padding: .75em 1em;
     background: lightyellow;
 }
 
@@ -132,10 +132,6 @@ body {
     border-bottom: 1px solid lightgray;
 }
 
-.latest-details {
-    flex-basis: 30%;
-}
-
 .latest-img {
     flex-basis: 30%;
 }
@@ -148,7 +144,7 @@ body {
 
 .latest-description {
     flex-basis: 70%;
-    padding: 0 0 0 1em;
+    padding: 0 0 0 2em;
 }
 
 .latest-comment {
