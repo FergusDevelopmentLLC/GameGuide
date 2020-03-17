@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @latest_game = Game.order(:created_at).last
+    @latest_game = Game.order(:updated_at).last
     erb :index
   end
 

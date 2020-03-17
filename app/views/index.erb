@@ -1,11 +1,13 @@
 <div class="home">
     <main class="main">
         <div class="latest-wrapper">
+            <%if @latest_game.image%>
             <div class="latest-img">
                 <img src="../../../uploads/<%=@latest_game.image%>"/>
             </div>
+            <%end%>
             <div class="latest-description">
-                <h3>Latest game: <a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a></h3>
+                <h3>Latest game update: <a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a></h3>
                 <h4><strong><%=@latest_game.short_description%></strong></h4>
                 <p><%=@latest_game.description%></p>
                 <ul>
