@@ -151,6 +151,10 @@ body {
     padding: 0 0 0 1em;
 }
 
+.latest-comment {
+    margin-top: .5em
+}
+
 .categories {
     display: flex;
     flex-wrap: wrap;

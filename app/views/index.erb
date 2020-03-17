@@ -14,8 +14,10 @@
                     <li>Type: <%=@latest_game.type.name%></li>
                     <%if !@latest_game.number_of_players.blank?%><li>Number of players: <%=@latest_game.number_of_players%></li><%end%>
                     <%if !@latest_game.play_length.blank?%><li>Play length: <%=@latest_game.play_length%></li><%end%>
-                    <%if !@latest_game.tags.empty?%><li><li>Tags: <%=@latest_game.tag_links%></li><%end%>
+                    <%if !@latest_game.tags.empty?%><li>Tags: <%=@latest_game.tag_links%></li><%end%>
                 </ul>
+                <%if !@latest_game.comments.empty?%><p class="latest-comment"><em><%=@latest_game.comments.last.content%></em> - <%=@latest_game.comments.last.user.username%> <%=Time.at(@latest_game.comments.last.updated_at).to_datetime.strftime("%m/%d/%Y")%></p><%end%>
+                
             </div>
         </div>
         <div class="categories-wrapper">
