@@ -11,7 +11,7 @@
                 <h4><strong><%=@latest_game.short_description%></strong></h4>
                 <p><%=@latest_game.description%></p>
                 <ul>
-                    <li>Type: <%=@latest_game.type.name%></li>
+                    <li>Type: <a href='/types/<%=@latest_game.type.id%>'><%=@latest_game.type.name%></a></li>
                     <%if !@latest_game.number_of_players.blank?%><li>Number of players: <%=@latest_game.number_of_players%></li><%end%>
                     <%if !@latest_game.play_length.blank?%><li>Play length: <%=@latest_game.play_length%></li><%end%>
                     <%if !@latest_game.tags.empty?%><li>Tags: <%=@latest_game.tag_links%></li><%end%>
