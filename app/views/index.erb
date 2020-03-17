@@ -47,11 +47,13 @@
     </main>
     <aside class="right" <%=logged_in? ? "style='border-top: 1px solid lightgray'" : ""%>>
         <h3>Featured Games</h3>
-        <div class="feature">
-            <img src="../../../images/monopoly.jpg"/>
-        </div>
-        <div class="feature">
-            <img src="../../../images/monopoly.jpg"/>
-        </div>
+       <% @featured.each { |featured| %>
+            <div class="feature">
+                <img src="../../../uploads/<%=featured.image%>"/>
+                <div class="feature-desc">
+                    <a href='/games/<%=featured.id%>'><%=featured.name%></a> - <%=featured.short_description%>
+                </div>
+            </div>
+        <%}%>
     </aside>
 </div>
