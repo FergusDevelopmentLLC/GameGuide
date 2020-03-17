@@ -142,12 +142,17 @@ body {
 
 .latest-img img {
     border: 1px solid lightgray;
+    background: lightgray;
     padding: 1px;
 }
 
 .latest-description {
     flex-basis: 70%;
     padding: 0 0 0 1em;
+}
+
+.latest-comment {
+    margin-top: .5em
 }
 
 .categories {
@@ -163,6 +168,12 @@ body {
 
 .feature {
     margin-bottom: 1em;
+}
+
+.feature img {
+    border: 1px solid lightgray;
+    background: lightgray;
+    padding: 1px;
 }
 
 .categories-wrapper {
@@ -340,6 +351,15 @@ form div.form-tags label {
 #game_edit_current_image {
     border: 1px solid lightgray;
     width: 200px;
+}
+
+.add-new-game {
+    margin-top: 1em;
+}
+
+.feature-desc {
+    text-align: center;
+    margin-top: .5em;
 }
 
 @media screen and (max-width: 700px) {

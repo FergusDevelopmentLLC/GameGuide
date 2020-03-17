@@ -77,6 +77,10 @@ class GamesController < ApplicationController
                     end
                 end
 
+                if @game.featured == 1
+                    Game.delete_old_featured
+                end
+                
                 flash[:message] = "Game saved."
                 redirect "/games/#{@game.id}"
             else
@@ -142,6 +146,11 @@ class GamesController < ApplicationController
                 end
 
                 @game.save
+                
+                if @game.featured == 1
+                    Game.delete_old_featured
+                end
+
                 flash[:message] = "Game updated successfully."
                 redirect "/games/#{@game.id}"
 

@@ -9,6 +9,7 @@ class Game < ActiveRecord::Base
     validates_presence_of :short_description
     validates_presence_of :description
     validates_presence_of :type
+    validates_presence_of :image
 
     def tag_links
         if(self.tags.empty?)
@@ -16,6 +17,23 @@ class Game < ActiveRecord::Base
         else
             self.tags.map {|tag| "<a href='/tags/#{tag.id}'>#{tag.name}</a>"}.join(", ")
         end
+    end
+
+    def self.delete_old_featured
+        current_featured_games = Game.where(:featured => 1)
+        latest_featured = []
+        if current_featured_games.count > 2
+            latest_featured << current_featured_games.order(updated_at: :desc).first
+            latest_featured << current_featured_games.order(updated_at: :desc).second
+            
+            current_featured_games.each { |game|
+                if(!latest_featured.include?(game))
+                    game.featured = 0
+                    game.save
+                end
+            }
+        end
+        
     end
     
 end

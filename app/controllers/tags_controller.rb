@@ -21,6 +21,8 @@ class TagsController < ApplicationController
                 if !@game.tags.include?(tag)
                     #cant user @game << tag here because need user_id on the GameTagUser record
                     GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
+                    @game.updated_at = Time.now.to_i 
+                    @game.save
                     flash[:message] = "Thank you for adding a tag"
                 else
                     flash[:add_tag_error] = "Game already has this tag"

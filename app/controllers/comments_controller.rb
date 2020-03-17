@@ -22,6 +22,8 @@ class CommentsController < ApplicationController
             if new_comment.valid?
                 new_comment.user = current_user
                 @game.comments << new_comment
+                @game.updated_at = Time.now.to_i 
+                @game.save
                 flash[:message] = "Thank you for adding a comment."
             else
                 flash[:add_comment_error] = "Please enter a comment."
