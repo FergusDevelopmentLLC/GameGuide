@@ -7,7 +7,7 @@
         <div class="show-wrapper">
             <div class="show-item">
                 <div class="show-label">Name:</div>
-                <div class="show-content"><%=@game.name%></div>
+                <div class="show-content"><%=@game.name%> - Created: <%=Time.at(@game.created_at).to_datetime%></div>
             </div>
             <div class="show-item">
                 <div class="show-label">Featured:</div>

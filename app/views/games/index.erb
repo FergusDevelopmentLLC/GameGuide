@@ -5,7 +5,10 @@
         <% end %>
         <h1>Games</h1>
         <%@games.each { |game|%>
-            <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
+            <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%><%=game.featured == 1 ? " - Featured" : ""%></div>
         <%}%>
+        <% if logged_in? %>
+        <div class="add-new-game"><a href='/games/new'>Add new game</a></div>
+        <%end%>
     </main>
 </div>
