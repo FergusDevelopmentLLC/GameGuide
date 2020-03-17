@@ -1,44 +1,46 @@
-<main>
-    <h1>User profile</h1>
-    <div class="show-wrapper">
-        <div class="show-item">
-            <div class="show-label">User name:</div>
-            <div class="show-content"><%=@user.username%></div>
-        </div>
-        <div class="show-item">
-            <div class="show-label">Email:</div>
-            <div class="show-content"><%=@user.email%></div>
-        </div>
-        <div class="show-item">
-            <div class="show-label">Games added:</div>
-            <div class="show-content">
-                <p>
-                <% if @user.games.empty?%>
-                    No games yet
-                <% else %>
-                    <% @user.games.each {|game|%>
-                       <a href="/games/<%= game.id %>"><%= game.name %></a><br/>
-                    <% } %>
-                <% end %>
-                </p>
+<div class="full">
+    <main class="main">
+        <h1>User profile</h1>
+        <div class="show-wrapper">
+            <div class="show-item">
+                <div class="show-label">User name:</div>
+                <div class="show-content"><%=@user.username%></div>
             </div>
-        </div>
-        <div class="show-item">
-            <div class="show-label">Tags added:</div>
-            <div class="show-content">
-                <p>
-                <% if @user.tags.empty?%>
-                    No tags yet
-                <% else %>
-                    <% @user.tags.uniq.each {|tag|%>
-                       <a href="/tags/<%= tag.id %>"><%= tag.name %></a><br/>
-                    <% } %>
-                <% end %>
-                </p>
+            <div class="show-item">
+                <div class="show-label">Email:</div>
+                <div class="show-content"><%=@user.email%></div>
             </div>
+            <div class="show-item">
+                <div class="show-label">Games added:</div>
+                <div class="show-content">
+                    <p>
+                    <% if @user.games.empty?%>
+                        No games yet
+                    <% else %>
+                        <% @user.games.each {|game|%>
+                        <a href="/games/<%= game.id %>"><%= game.name %></a><br/>
+                        <% } %>
+                    <% end %>
+                    </p>
+                </div>
+            </div>
+            <div class="show-item">
+                <div class="show-label">Tags added:</div>
+                <div class="show-content">
+                    <p>
+                    <% if @user.tags.empty?%>
+                        No tags yet
+                    <% else %>
+                        <% @user.tags.uniq.each {|tag|%>
+                        <a href="/tags/<%= tag.id %>"><%= tag.name %></a><br/>
+                        <% } %>
+                    <% end %>
+                    </p>
+                </div>
+            </div>
+            <% if can_edit_user?(@user) %>
+            <a href="/users/<%=@user.id%>/edit">Edit</a>
+            <% end %>
         </div>
-        <% if can_edit_user?(@user) %>
-        <a href="/users/<%=@user.id%>/edit">Edit</a>
-        <% end %>
-    </div>
-</main>
+    </main>
+</div>

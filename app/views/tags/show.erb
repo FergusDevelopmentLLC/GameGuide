@@ -1,10 +1,12 @@
-<main>
-    <h1>Games tagged "<%=@tag.name%>"</h1>
-    <% if !@tag.games.empty? %>
-    <%@tag.games.each { |game|%>
-        <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
-    <%}%>
-    <% else %>
-        <div>No games available tagged with "<%=@tag.name%>"</div>
-    <% end %>
-</main>
+<div class="full">
+    <main class="main">
+        <h1>Games tagged "<%=@tag.name%>"</h1>
+        <% if !@tag.games.empty? %>
+        <%@tag.games.each { |game|%>
+            <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%></div>
+        <%}%>
+        <% else %>
+            <div>No games available tagged with "<%=@tag.name%>"</div>
+        <% end %>
+    </main>
+</div>

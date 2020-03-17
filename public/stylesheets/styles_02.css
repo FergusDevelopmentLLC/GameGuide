@@ -1,0 +1,133 @@
+/* .flash-message {
+    color: green;
+    margin-bottom: .5em;
+} */
+
+/* .flash-error {
+    color: red;
+    margin-bottom: .5em;
+} */
+
+/* .show-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: .3em;
+} */
+
+/* .show-label {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 150px;
+} */
+
+/* .show-type, .show-tags, .show-comments {
+    margin-top: 1.5em;
+} */
+
+/* Forms */
+/* .form div {
+    display: flex;
+    justify-content: flex-start;
+} */
+
+/* .form-item {
+    margin-bottom: .5em;
+} */
+
+/* .form div label {
+    min-width: 150px;
+    align-self: flex-start;
+    margin-top: .2em;
+} */
+
+/* input, textarea {
+    border: 1px solid lightgray;
+    padding: 3px;
+} */
+
+/* input[type='checkbox'] {
+    margin-top: 5px;
+} */
+
+/* textarea {
+    width: 300px;
+    height: 100px;
+} */
+
+/* .form-select-wrapper{
+    flex-direction: column;
+} */
+
+/* .form-select-item {
+    flex-direction: row;
+    margin-bottom: .3em;
+} */
+
+/* .form-select input{
+    margin-top: .1em;
+    margin-right: .2em;
+} */
+
+/* form div.form-types {
+    margin-top: 1.5em;
+} */
+
+/* form div.form-types label {
+    margin: 0;
+} */
+
+/* form div.form-tags {
+    margin-top: 1.5em;
+} */
+
+/* form div.form-tags label {
+    margin: 0;
+} */
+
+/* .form-new-tag {
+    margin-bottom: 1.5em;
+} */
+
+/* .show-comments-wrapper {
+    margin-bottom: .5em;
+} */
+
+/* .form-comment-edit {
+    flex-direction: column;
+} */
+
+/* .form-comment-edit input[type="text"] {
+    max-width: 300px;
+    margin-bottom: .5em;
+} */
+
+/* .form-comment-edit input[type="submit"] {
+    margin-right: .5em;
+} */
+
+/* .show-comment {
+    margin: 0 0 .5em 0;
+} */
+
+/* h1 {
+    margin-bottom: .5em;
+} */
+
+/* .validation_error {
+    margin-bottom: 1em;
+    display: inline-block;
+    color: red;
+} */
+
+/* .validation_error ul {
+    list-style-type: none;
+} */
+
+/* .show-game-image-wrapper, .game-edit-current-image {
+    max-width: 200px;
+    margin-right: 1em;
+} */
+
+/* .show-game-image-wrapper, .game-edit-current-image img {
+    border: 1px solid lightgray;
+} */
