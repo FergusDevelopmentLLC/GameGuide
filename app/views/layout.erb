@@ -13,7 +13,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/games">Games</a></li>
             <li><a href="/types">Game Types</a></li>
-            <li><a href="/tags">Tags</a></li>
+            <li><a href="/tags">Game Tags</a></li>
             <% if logged_in? %>
                 <li><a href="/users">Users</a></li>
                 <li><a href="/logout">Logout</a></li>
@@ -23,6 +23,9 @@
             <% end %> 
         </ul>
     </header>
+    <% if logged_in? %>
+        <div class="welcome">Welcome, <%=current_user.username%></div>
+    <% end %>
     <%= yield %>
     <footer class="footer">&copy;<%=Time.new.year%> Board Game Tracker</footer>
 </body>

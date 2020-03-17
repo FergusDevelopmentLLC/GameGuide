@@ -1,9 +1,9 @@
 <div class="full">
     <main class="main">
-        <h1>Log in</h1>
         <% if flash.has?(:message) %>
             <div class="flash-message"><%=flash[:message]%></div>
         <% end %>
+        <h1>Log in</h1>
         <% if flash.has?(:error) %>
             <div class="flash-error"><%=flash[:error]%></div>
         <% end %>

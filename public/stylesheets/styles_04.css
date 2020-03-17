@@ -33,16 +33,19 @@ body {
 
     display: grid;
     grid-template-areas: "header"
+                         "welcome"
                          "home"
                          "footer";
     grid-template-columns: 1fr;
     grid-template-rows: 100px 
+                        auto
                         1fr
                         30px;
     min-height: 100vh;
 }
 
 .home {
+    grid-area: home;
     display: grid;
     grid-template-areas: "main featured";
     grid-template-columns: 3fr 1fr;
@@ -62,9 +65,19 @@ body {
     background: #cedbe9;
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.welcome {
+    grid-area: welcome;
+    background: lightyellow;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    text-align: right;
+    padding: .5em 4em .5em 0;
 }
 
 .header div {
@@ -78,12 +91,13 @@ body {
 .header ul {
     display: flex;
     margin: 0 3em 0 0;
-    flex-basis: 50%;
+    flex-basis: 75%;
     justify-content: flex-end;
 }
 
 .header ul li {
     margin-left: 2em;
+    white-space: nowrap;
 }
 
 .footer { 
@@ -106,7 +120,7 @@ body {
 
 .right { 
     grid-area: featured;
-    border-right: 1px solid gray;
+    border-right: 1px solid lightgray;
     padding: 1em;
     background: #f2efe7;
 }
@@ -146,17 +160,47 @@ body {
     margin-top: 1em;
 }
 
+/* Show pages */
+.flash-message {
+    color: green;
+    margin-bottom: .5em;
+}
+
+.flash-error {
+    color: red;
+    margin-bottom: .5em;
+}
+
+.show-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: .3em;
+}
+
+.show-label {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 150px;
+}
+
+.show-type, .show-tags, .show-comments {
+    margin-top: 1.5em;
+}
+
 /* Forms */
 .form div {
     display: flex;
     justify-content: flex-start;
+}
+
+.form-item {
     margin-bottom: .5em;
 }
 
 .form div label {
     min-width: 150px;
     align-self: flex-start;
-    margin-top: 5px;
+    margin-top: .2em;
 }
 
 input, textarea {
@@ -171,6 +215,76 @@ input[type='checkbox'] {
 textarea {
     width: 300px;
     height: 100px;
+}
+
+.form-select-wrapper{
+    flex-direction: column;
+}
+
+.form-select-item {
+    flex-direction: row;
+    margin-bottom: .3em;
+}
+
+.form-select input{
+    margin-top: .1em;
+    margin-right: .2em;
+}
+
+form div.form-types {
+    margin-top: 1.5em;
+}
+
+form div.form-types label {
+    margin: 0;
+}
+
+form div.form-tags {
+    margin-top: 1.5em;
+}
+
+form div.form-tags label {
+    margin: 0;
+}
+
+.form-new-tag {
+    margin-bottom: 1.5em;
+}
+
+.show-game-image-wrapper, .game-edit-current-image {
+    max-width: 200px;
+    margin-right: 1em;
+}
+
+.show-game-image-wrapper, .game-edit-current-image img {
+    border: 1px solid lightgray;
+}
+
+.show-comment {
+    margin: 0 0 .5em 0;
+}
+
+.form-comment-edit {
+    flex-direction: column;
+}
+
+.form-comment-edit input[type="text"] {
+    max-width: 300px;
+    margin-bottom: .5em;
+}
+
+.form-comment-edit input[type="submit"] {
+    margin-right: .5em;
+}
+
+.validation_error {
+    margin-bottom: 1em;
+    display: inline-block;
+    color: red;
+}
+
+.validation_error ul {
+    list-style-type: none;
 }
 
 /* game show page*/
@@ -275,10 +389,14 @@ textarea {
         margin-top: .5em;
     }
 
-    header ul {
-        margin: .5em;
+    .header ul {
+        margin: 1em 0 0 0;
+        width: 90%;
+        justify-content: space-around;
     }
-    header ul li {
-        margin: 0 1em;
+
+    .header ul li {
+        margin: 0;
+        white-space: nowrap;
     }
 }
