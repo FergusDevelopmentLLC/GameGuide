@@ -3,100 +3,93 @@
         <% if flash.has?(:message) %>
             <div class="flash-message"><%=flash[:message]%></div>
         <% end %>
-        <h1>Game Detail</h1>
-        <div class="show-wrapper">
-            <div class="show-item">
-                <div class="show-label">Name:</div>
-                <div class="show-content"><%=@game.name%> - Created: <%=Time.at(@game.created_at).to_datetime%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Featured:</div>
-                <div class="show-content"><%=@game.featured == 1 ? "Featured" : "Not featured"%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Short description:</div>
-                <div class="show-content"><%=@game.short_description%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Description:</div>
-                <div class="show-content"><%=@game.description%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Number of players:</div>
-                <div class="show-content"><%=!@game.number_of_players.blank? ? @game.number_of_players : "Not specified"%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Play length:</div>
-                <div class="show-content"><%=!@game.play_length.blank? ? @game.play_length : "Not specified"%></div>
-            </div>
-            <div class="show-item">
-                <div class="show-label">Image:</div>
-                <% if @game.image %>
-                <div class="show-content show-game-image-wrapper">
-                    <img src="../../../uploads/<%=@game.image%>"/>
+        <div class="game-detail-wrapper">
+            <div class="show-wrapper">
+                <div class="show-item">
+                    <div class="show-content"><h2><%=@game.name%> - <%=@game.short_description%></h2></div>
                 </div>
-                <% else %>
-                <div class="show-content">No image</div>
+                <%if @game.featured == 1 %>
+                <div class="show-item"> 
+                    <div class="show-content"><strong>This game is currently featured</strong></div>
+                </div>
                 <% end %>
-            </div>
-            <div class="show-item show-type">
-                <div class="show-label">Type:</div>
-                <div class="show-content"><a href='/types/<%=@game.type.id%>'><%=@game.type.name%></a></div>
-            </div>
-            <div class="show-item show-tags">
-                <div class="show-label">Tags:</div>
-                <div class="show-content">
-                    <%=@game.tag_links%>
+                <div class="show-item">
+                    <div class="show-content"><%=@game.description%></div>
                 </div>
-            </div>
-            <% if logged_in? %>
-            <div class="show-item">
-                <div class="show-label">Add tag:</div>
-                <div>
-                    <form action='/tags' method="post" id="new_tag_form" class="form">
-                        <input type='hidden' name='game_id' value='<%=@game.id%>' />
-                        <input type="text" name="new_tag" id="new_tag" placeholder="Add new tag" value="" />
-                        <input type="submit" value="Add tag" />
-                        <% if flash.has?(:add_tag_error) %>
-                            <div class="flash-error" style="display:inline-block"><%=flash[:add_tag_error]%></div>
-                        <% end %>
-                    </form>
+                <%if !@game.number_of_players.blank? %>
+                <div class="show-item">
+                    <div class="show-content"><strong>Number of players: </strong><%= @game.number_of_players %></div>
                 </div>
-            </div>
-            <% end %>
-            <div class="show-item show-comments">
-                <div class="show-label">Comments:</div>
-                <div>
-                    <div class="show-comments-wrapper">
-                    <%if @game.comments.empty?%>
-                        <div class="show-comment">This game has no comments yet.</div>
-                    <%else%>
-                        <%@game.comments.each { |comment|%>
-                            <%if logged_in? && can_edit_comment?(comment)%>
-                            <div class="show-comment"><a href='/comments/<%=comment.id%>/edit'><em><%=comment.content%></em></a> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
-                            <% else %>
-                            <div class="show-comment"><em><%=comment.content%></em> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
-                            <%end%>
-                        <%}%>
-                    <%end%>
+                <% end %>
+                <%if !@game.play_length.blank? %>
+                <div class="show-item">
+                    <div class="show-content"><strong>Play length: </strong><%=@game.play_length%></div>
+                </div>
+                <% end %>
+                <div class="show-item">
+                    <div class="show-content"><strong>Game type: </strong><a href='/types/<%=@game.type.id%>'><%=@game.type.name%></a></div>
+                </div>
+                <div class="show-item show-tags">
+                    <div class="show-content">
+                        <strong>Tags: </strong><%=@game.tag_links%>
                     </div>
-                    <% if logged_in? %>
-                    
-                    <form action='/comments' method="post" id="new_comment_form" class="form">
-                        <input type='hidden' name='game_id' value='<%=@game.id%>' />
-                        <input type="text" name="show_new_comment" id="show_new_comment" placeholder="Add comment" value="" />
-                        <input type="submit" value="Add comment" />
-                        <% if flash.has?(:add_comment_error) %>
-                            <div class="flash-error" style="display:inline-block"><%=flash[:add_comment_error]%></div>
-                        <% end %>
-                    </form>
-
-                    <% end %>
                 </div>
+                <% if logged_in? %>
+                <div class="show-item">
+                    <div>
+                        <form action='/tags' method="post" id="new_tag_form" class="form">
+                            <input type='hidden' name='game_id' value='<%=@game.id%>' />
+                            <input type="text" name="new_tag" id="new_tag" placeholder="Add new tag" value="" />
+                            <input type="submit" value="Add tag" />
+                            <% if flash.has?(:add_tag_error) %>
+                                <div class="flash-error" style="display:inline-block"><%=flash[:add_tag_error]%></div>
+                            <% end %>
+                        </form>
+                    </div>
+                </div>
+                <% end %>
+                <div class="show-item show-comments">
+                    <div>
+                        <div><strong>Comments:</strong></div>
+                        <div class="show-comments-wrapper">
+                        <%if @game.comments.empty?%>
+                            <div class="show-comment">This game has no comments yet.</div>
+                        <%else%>
+                            <%@game.comments.order(updated_at: :desc).each { |comment|%>
+                                <%if logged_in? && can_edit_comment?(comment)%>
+                                <div class="show-comment"><a href='/comments/<%=comment.id%>/edit'><em><%=comment.content%></em></a> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
+                                <% else %>
+                                <div class="show-comment"><em><%=comment.content%></em> - <%=comment.user.username%> <%=Time.at(comment.updated_at).to_datetime.strftime("%m/%d/%Y")%></div>
+                                <%end%>
+                            <%}%>
+                        <%end%>
+                        </div>
+                        <% if logged_in? %>
+                        
+                        <form action='/comments' method="post" id="new_comment_form" class="form">
+                            <input type='hidden' name='game_id' value='<%=@game.id%>' />
+                            <input type="text" name="show_new_comment" id="show_new_comment" placeholder="Add comment" value="" />
+                            <input type="submit" value="Add comment" />
+                            <% if flash.has?(:add_comment_error) %>
+                                <div class="flash-error" style="display:inline-block"><%=flash[:add_comment_error]%></div>
+                            <% end %>
+                        </form>
+
+                        <% end %>
+                    </div>
+                </div>
+                <%if logged_in? && can_edit_game?(@game)%>
+                    <div class="edit-game">
+                        <a href='/games/<%=@game.id%>/edit'>Edit game</a>
+                    </div>
+                <%end%>
             </div>
-            <%if logged_in? && can_edit_game?(@game)%>
-                <a href='/games/<%=@game.id%>/edit'>Edit game</a>
+            <% if @game.image %>
+                <div class="game-detail-image-wrapper">
+                    <img src="../../../uploads/<%=@game.image%>" class="show-game-image"/>
+                </div>
             <%end%>
         </div>
+        
     </main>
 </div>
