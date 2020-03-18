@@ -5,7 +5,7 @@ class GamesController < ApplicationController
     use Rack::Flash
     
     get "/games" do
-        @games = Game.all
+        @games = Game.all.order(:name)
         erb :'games/index'
     end
 
