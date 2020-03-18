@@ -3,12 +3,28 @@
         <% if flash.has?(:message) %>
             <div class="flash-message"><%=flash[:message]%></div>
         <% end %>
-        <h1>Games</h1>
-        <%@games.each { |game|%>
-            <div><a href="/games/<%=game.id%>"><%=game.name%></a> - <%=game.type.name%> - <%=game.short_description%><%=game.featured == 1 ? " - Featured" : ""%></div>
-        <%}%>
-        <% if logged_in? %>
-        <div class="add-new-game"><a href='/games/new'>Add new game</a></div>
+        
+        <%if logged_in?%>
+        <div class="game-listing-new-game">
+            <a href='games/new'>New game</a>
+        </div>
         <%end%>
+        <h1>All games</h1>
+        <div class="game-listing-wrapper">
+            <% @games.each { |game| %>
+                <div class="game-listing-item">
+                    <div class="game-listing-item-img">
+                        <img src="../../../uploads/<%=game.image%>"/>
+                    </div>
+                    <div class="game-listing-item-details">
+                        <h4><a href="/games/<%=game.id%>"><%=game.name%></a></h4>
+                        <h5><%=game.short_description%></h5>
+                        <ul>
+                            <li>Type: <a href='/types/<%=game.type.id%>'><%=game.type.name%></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+        </div>
     </main>
 </div>

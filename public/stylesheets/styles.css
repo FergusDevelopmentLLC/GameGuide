@@ -338,7 +338,7 @@ form div.form-tags label {
 /* games listing */
 .game-listing-new-game {
     text-align: right;
-    margin-bottom: 1em;
+    float: right;
 }
 
 .game-listing-wrapper {
@@ -351,6 +351,7 @@ form div.form-tags label {
     flex: 0 0 20%;
     padding: .5em;
     border: 1px solid lightgray;
+    background:#fff;
     margin: 1em;
 }
 
