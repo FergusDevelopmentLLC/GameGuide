@@ -64,7 +64,8 @@ class GamesController < ApplicationController
                 if params[:tag_ids]
                     params[:tag_ids].each {|tag_id|
                         tag = Tag.find(tag_id)
-                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        #cant do @game.tags << tag here because need user_id on the GameTagUser record
+                        #so that if user is deleted, this tag association is also deleted
                         GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
                     }
                 end
@@ -72,7 +73,8 @@ class GamesController < ApplicationController
                 if !params[:new_tag].empty?
                     tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
                     if !@game.tags.include?(tag)
-                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        #cant do @game.tags << tag here because need user_id on the GameTagUser record
+                        #so that if user is deleted, this tag association is also deleted
                         GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
                     end
                 end
@@ -130,7 +132,8 @@ class GamesController < ApplicationController
                     params[:tag_ids].each {|tag_id|
                         tag = Tag.find(tag_id)
                         if !@game.tags.include?(tag)
-                            #cant user @game << tag here because need user_id on the GameTagUser record
+                            #cant do @game.tags << tag here because need user_id on the GameTagUser record
+                            #so that if user is deleted, this tag association is also deleted
                             GameTagUser.create(:game => @game, :tag => tag, :user => current_user)   
                         end
                     }
@@ -140,7 +143,8 @@ class GamesController < ApplicationController
                     tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
                     
                     if !@game.tags.include?(tag)
-                        #cant user @game << tag here because need user_id on the GameTagUser record
+                        #cant do @game.tags << tag here because need user_id on the GameTagUser record
+                        #so that if user is deleted, this tag association is also deleted
                         GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
                     end
                 end

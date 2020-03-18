@@ -19,9 +19,10 @@ class TagsController < ApplicationController
             tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
             if tag.valid?
                 if !@game.tags.include?(tag)
-                    #cant user @game << tag here because need user_id on the GameTagUser record
+                    #cant do @game.tags << tag here because need user_id on the GameTagUser record
+                    #so that if user is deleted, this tag association is also deleted
                     GameTagUser.create(:game => @game, :tag => tag, :user => current_user)
-                    @game.updated_at = Time.now.to_i 
+                    @game.updated_at = Time.now.to_i #trigger the updated_at so game appears on home
                     @game.save
                     flash[:message] = "Thank you for adding a tag"
                 else
