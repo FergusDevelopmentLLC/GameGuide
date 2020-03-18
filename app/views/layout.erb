@@ -29,7 +29,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="header-welcome"><%= logged_in? ? "Welcome, #{current_user.username}" : "&nbsp;"%></div>
+            <div class="header-welcome">
+            <%if logged_in?%>Welcome, <a href='/users/<%=current_user.id%>'><%=current_user.username%></a>
+            <%else%>
+            &nbsp;
+            <%end%>
+            </div>
         </div>
     </header>
     <%= yield %>
