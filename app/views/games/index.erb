@@ -3,7 +3,6 @@
         <% if flash.has?(:message) %>
             <div class="flash-message"><%=flash[:message]%></div>
         <% end %>
-        
         <%if logged_in?%>
         <div class="game-listing-new-game">
             <a href='games/new'>New game</a>

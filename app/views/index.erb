@@ -1,5 +1,8 @@
 <div class="home">
     <main class="main">
+        <% if flash.has?(:message) %>
+            <div class="flash-message"><%=flash[:message]%></div>
+        <% end %>
         <div class="latest-wrapper">
             <%if @latest_game.image%>
             <div class="latest-img">
