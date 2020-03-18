@@ -3,7 +3,7 @@
         <div class="latest-wrapper">
             <%if @latest_game.image%>
             <div class="latest-img">
-                <img src="../../../uploads/<%=@latest_game.image%>"/>
+                <a href='/games/<%=@latest_game.id%>'><img src="../../../uploads/<%=@latest_game.image%>"/></a>
             </div>
             <%end%>
             <div class="latest-description">
@@ -46,7 +46,7 @@
         <h3>Featured Games</h3>
        <% @featured.each { |featured| %>
             <div class="feature">
-                <img src="../../../uploads/<%=featured.image%>"/>
+                <a href='/games/<%=featured.id%>'><img src="../../../uploads/<%=featured.image%>"/></a>
                 <div class="feature-desc">
                     <a href='/games/<%=featured.id%>'><%=featured.name%></a> - <%=featured.short_description%>
                 </div>
