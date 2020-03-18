@@ -363,6 +363,7 @@ form div.form-tags label {
 
 .game-detail-image-wrapper img {
     height: auto;
+    border: 1px solid lightgray;
 }
 
 .game-listing-new-game {
