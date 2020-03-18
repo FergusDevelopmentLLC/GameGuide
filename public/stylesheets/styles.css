@@ -228,8 +228,16 @@ body {
     min-width: 150px;
 }
 
+.show-comments-wrapper {
+    margin: .5em 0 1em 0;
+}
+
 .show-type, .show-tags, .show-comments {
-    margin-top: 1.5em;
+    margin-top: 1em;
+}
+
+.edit-game {
+    margin: 1.5em 0 0 0;
 }
 
 /* Forms */
@@ -333,20 +341,27 @@ form div.form-tags label {
 }
 
 /* game show page*/
+.game-detail-wrapper {
+    display: flex;
+}
+
+.show-wrapper {
+    flex-basis: 65%;
+}
+
+.game-detail-image-wrapper {
+    flex-basis: 35%;
+    margin-left: 1em;
+}
+
 .game-show-wrapper {
     display: flex;
 }
 
-.game-show-image-wrapper {
-    flex-basis: 30%;
-    margin-right: 1em;
+.game-detail-image-wrapper img {
+    height: auto;
 }
 
-.game-show-image-wrapper img {
-    border: 1px solid lightgray;
-}
-
-/* games listing */
 .game-listing-new-game {
     text-align: right;
     float: right;
