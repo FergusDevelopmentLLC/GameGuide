@@ -33,12 +33,10 @@ body {
 
     display: grid;
     grid-template-areas: "header"
-                         "welcome"
                          "home"
                          "footer";
     grid-template-columns: 1fr;
     grid-template-rows: 100px 
-                        auto
                         1fr
                         30px;
     min-height: 100vh;
@@ -67,35 +65,50 @@ body {
     border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     display: flex;
-    justify-content: center;
+    align-items: flex-end;
+}
+
+.header-content {
+    width: 100%;
+}
+
+.nav-wrapper {
+    display: flex;
     align-items: center;
 }
 
-.welcome {
-    grid-area: welcome;
-    background: lightyellow;
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    text-align: right;
-    padding: .3em 1em .3em 0;
-}
-
-.header div {
-    flex-basis: 50%;
-    padding: .5em 0 .5em 1em;
-    font-weight: bold;
-    font-size: 2em;
-    color: blue;
-}
-
-.header ul {
+.nav-logo {
+    flex-basis: 30%;
+    height: 60px;
     display: flex;
-    margin: 0 3em 0 0;
-    flex-basis: 75%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nav {
+    flex-basis: 70%;
+}
+
+.nav-title {
+    margin: 0 0 0 1em;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #0000cd;
+    white-space: nowrap;
+}
+
+.header-welcome {
+    text-align: right;
+    margin: .2em 1em .5em 0;
+}
+
+.nav ul {
+    display: flex;
+    margin: 0 1em 0 0;
     justify-content: flex-end;
 }
 
-.header ul li {
+.nav ul li {
     margin-left: 2em;
     white-space: nowrap;
 }
@@ -191,8 +204,6 @@ body {
     background: lightgray;
     padding: 1px;
 }
-
-
 
 /* Show pages */
 .flash-message {
@@ -338,7 +349,7 @@ form div.form-tags label {
 /* games listing */
 .game-listing-new-game {
     text-align: right;
-    margin-bottom: 1em;
+    float: right;
 }
 
 .game-listing-wrapper {
@@ -351,6 +362,7 @@ form div.form-tags label {
     flex: 0 0 20%;
     padding: .5em;
     border: 1px solid lightgray;
+    background:#fff;
     margin: 1em;
 }
 
@@ -377,6 +389,29 @@ form div.form-tags label {
 }
 
 @media screen and (max-width: 700px) {
+
+    .nav-title {
+        margin: 0;
+    }
+
+    .nav-wrapper {
+        flex-direction: column;
+    }
+
+    .nav ul {
+        justify-content: center;
+        margin: .5em 0 0 0;
+    }
+    
+    .nav ul li {
+        margin: 0 .5em 0 .5em;
+        white-space: nowrap;
+    }
+
+    .header-welcome {
+        text-align: center;
+        margin: .5em 0 .5em 0;
+    }
 
     .home {
         grid-template-areas:"main"
@@ -422,24 +457,24 @@ form div.form-tags label {
         margin: 0 auto 1em auto;
     }
 
-    .header {
+}
+
+@media screen and (max-width: 420px) {
+    body {
+        grid-template-rows: auto 
+                            1fr
+                            30px;
+    }
+
+    .nav ul {
         flex-direction: column;
     }
 
-    .header div {
-        padding: 0;
-        flex-basis: 30%;
-        margin-top: .5em;
+    .nav-wrapper {
+        align-items: flex-start;
     }
-
-    .header ul {
-        margin: 1em 0 0 0;
-        width: 90%;
-        justify-content: space-around;
-    }
-
-    .header ul li {
-        margin: 0;
-        white-space: nowrap;
+    
+    .nav-title {
+        margin: 0 0 0 8px;
     }
 }
