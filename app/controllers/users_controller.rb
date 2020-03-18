@@ -43,7 +43,6 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        flash[:message] = "Log out successful"
         session[:user_id] = nil
         redirect "/"
     end
