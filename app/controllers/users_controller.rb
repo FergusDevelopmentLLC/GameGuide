@@ -2,7 +2,7 @@ require 'rack-flash'
 class UsersController < ApplicationController
     use Rack::Flash
 
-    get '/signup' do
+    get "/signup" do
         if logged_in?
             flash[:message] = "Please log out in order to sign up with a new account"
             redirect "/"
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         end
     end
 
-    post '/signup' do
+    post "/signup" do
         @user = User.new(params[:user])
         if @user.valid?
             @user.save
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         end
     end
 
-    get '/login' do
+    get "/login" do
         if logged_in?
             flash[:message] = "Please log out in order to login with a different account"
             redirect "/"
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         end
     end
 
-    post '/login' do
+    post "/login" do
         @user = User.find_by(:username => params[:user][:username])
         if(@user && @user.authenticate(params[:user][:password]))
             session[:user_id] = @user.id
@@ -42,12 +42,12 @@ class UsersController < ApplicationController
         end
     end
 
-    get '/logout' do
-        session[:user_id] = nil
+    get "/logout" do
+        session[:user_id] = nil #using session.clear interfered with flash messages being displayed
         redirect "/"
     end
 
-    get '/users/:id' do
+    get "/users/:id" do
         if !logged_in?
             flash[:message] = "You must be logged in to see user profiles."
             redirect "/"
@@ -96,9 +96,8 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         if logged_in? && can_edit_user?(@user)
             @user.destroy
-            #delete any orphaned tags as a result
-            Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
-            session[:user_id] = nil
+            Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy} #delete any orphaned tags as a result
+            session[:user_id] = nil #using session.clear interfered with flash messages being displayed
             flash[:message] = "Account deleted. Please sign up a new account or login."
         else
             flash[:message] = "You must be logged in and owner of the account to delete it."
@@ -115,6 +114,4 @@ class UsersController < ApplicationController
             erb :'users/index'
         end
     end
-
 end
-
