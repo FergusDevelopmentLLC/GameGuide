@@ -162,6 +162,10 @@ body {
     background: lightyellow;
 }
 
+.full .main {
+    border-right: 1px solid #727272;
+}
+
 .right { 
     grid-area: featured;
     border-right: 1px solid #727272;
