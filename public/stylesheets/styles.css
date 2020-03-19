@@ -179,23 +179,58 @@ body {
 
 .types-wrapper h3 {
     text-align: center;
+    margin-bottom: .3rem;
+}
+
+.types-wrapper h3 {
+    text-align: center;
+    margin-bottom: .3rem;
+}
+
+.types-wrapper a {
+    text-decoration: none;
+    color: blue;
+}
+
+.types-wrapper a:link {
+    color: #0000cd;
+}
+  
+.types-wrapper a:visited {
+    color: #0000cd;
+}
+  
+.types-wrapper a:hover {
+    color: #0000cd;
+    text-decoration: underline;
+}
+
+.types-wrapper a:active {
+    color: #0000cd;
+    text-decoration: underline;
 }
 
 .type {
-    
     width: 125px;
     height: 125px;
-    border: 1px solid lightgray;
+    border: double lightgray;
     background: #f5f5f5;
     margin: .5em;
-    display:flex;
+    padding-top: 1em;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
+}
+
+.type ul {
+    margin: 0;
 }
 
 .type ul li {
     text-align: center;
+    font-size: .8em;
+    margin-bottom: .3rem;
 }
 
 .feature {
