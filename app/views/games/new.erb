@@ -17,10 +17,6 @@
                 <input type="text" name="game[name]" id="name" placeholder="Name" value="<%= @game && @game.name %>" />
             </div>
             <div class="form-item">
-                <label for="featured">Featured:</label>
-                <input type="checkbox" name="featured" id="featured" placeholder="featured" <%= if @game && @game.featured == 1 then "checked" end %> />
-            </div>
-            <div class="form-item">
                 <label for="short_descriptiom">Short description:</label>
                 <input type="text" name="game[short_description]" id="short_description" placeholder="Short description" value="<%= @game && @game.short_description %>" />
             </div>
