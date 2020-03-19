@@ -182,7 +182,7 @@ body {
 
 .latest-img img {
     border: 1px solid lightgray;
-    background: lightgray;
+    background: #fff;
     padding: 1px;
 }
 
@@ -427,6 +427,8 @@ form div.form-tags label {
 .game-detail-image-wrapper img {
     height: auto;
     border: 1px solid lightgray;
+    background: #fff;
+    padding: 1px;
 }
 
 .game-listing-new-game {
