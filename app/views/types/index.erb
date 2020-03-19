@@ -1,6 +1,6 @@
 <div class="full">
     <main class="main">
-        <h1>Game Types</h1>
+        <h2>Game Types</h2>
         <%@types.each { |type|%>
             <div><a href="/types/<%=type.id%>"><%=type.name%></a> - <%=type.game_count_display%></div>
         <%}%>

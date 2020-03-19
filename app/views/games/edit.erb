@@ -1,6 +1,6 @@
 <div class="full">
     <main class="main">
-        <h1>Edit game</h1>
+        <h2>Edit game</h2>
         <% if @game && @game.errors.any? %>
         <div class="validation_error">
             <p><strong><%= @game.errors.uniq.count %> <%= @game.errors.uniq.count > 1 ? "errors" : "error"%> prohibited this game from being saved:</strong></p>

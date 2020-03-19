@@ -1,6 +1,6 @@
 <div class="full">
     <main class="main">
-        <h1>Tags</h1>
+        <h2>Tags</h2>
         <% if !@tags.empty? %>
         <%@tags.each { |tag|%>
             <div><a href="/tags/<%=tag.id%>"><%=tag.name%></a> - <%=tag.game_count_display%></div>
