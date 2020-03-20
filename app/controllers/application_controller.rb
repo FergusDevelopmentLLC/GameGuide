@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @latest_game = Game.order(:updated_at).last
+    @latest_game = Game.order(:created_at).last
     @featured = Game.get_featured_except(@latest_game)
     erb :index
   end
