@@ -86,6 +86,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-shadow: 0 0 5px #FF0000;
 }
 
 .nav {
@@ -188,6 +189,7 @@ body {
     border: 1px solid lightgray;
     background: #fff;
     padding: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .latest-description {
@@ -253,6 +255,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
 }
 
 .type ul {
@@ -273,6 +276,7 @@ body {
     border: 1px solid lightgray;
     background: lightgray;
     padding: 1px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     
 }
 
@@ -434,6 +438,7 @@ form div.form-tags label {
     border: 1px solid lightgray;
     background: #fff;
     padding: 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19);
 }
 
 .game-listing-new-game {
@@ -453,6 +458,7 @@ form div.form-tags label {
     border: 1px solid lightgray;
     background:#fff;
     margin: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19);
 }
 
 .game-listing-item-img {
