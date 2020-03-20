@@ -273,6 +273,7 @@ body {
     border: 1px solid lightgray;
     background: lightgray;
     padding: 1px;
+    
 }
 
 /* Show pages */
@@ -452,6 +453,7 @@ form div.form-tags label {
     border: 1px solid lightgray;
     background:#fff;
     margin: 1em;
+    min-width: 75%;
 }
 
 .game-listing-item-img {
@@ -541,7 +543,7 @@ form div.form-tags label {
     }
     
     .feature {
-        width: 50%;
+        width: 75%;
         margin: 0 auto 1em auto;
     }
 
