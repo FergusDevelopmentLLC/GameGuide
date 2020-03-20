@@ -158,7 +158,7 @@ body {
     grid-area: main;
     border-left: 1px solid #727272;
     border-right: 1px solid lightgray;
-    padding: .75em 1em 0 1em;
+    padding: .75em 1em .75em 1em;
     background: lightyellow;
 }
 
@@ -510,6 +510,10 @@ form div.form-tags label {
 
 .game-listing-item-details li {
     font-size: .8rem;
+}
+
+.game-listing-featured {
+    background: #ffff7a;
 }
 
 #game_edit_current_image {

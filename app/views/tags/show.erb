@@ -4,7 +4,7 @@
         <% if !@tag.games.empty? %>
         <div class="game-listing-wrapper">
             <% @tag.games.each { |game| %>
-                <div class="game-listing-item">
+                <div class="game-listing-item<%if game.featured == 1%> game-listing-featured<%end%>">
                     <%if game.featured == 1%>
                         <h4 style="text-align:center;">Featured</h4>
                     <%end%>
