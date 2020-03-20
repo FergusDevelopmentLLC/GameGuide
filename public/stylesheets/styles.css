@@ -453,7 +453,6 @@ form div.form-tags label {
     border: 1px solid lightgray;
     background:#fff;
     margin: 1em;
-    min-width: 75%;
 }
 
 .game-listing-item-img {
@@ -543,7 +542,7 @@ form div.form-tags label {
     }
     
     .feature {
-        width: 75%;
+        width: 50%;
         margin: 0 auto 1em auto;
     }
 
@@ -560,6 +559,10 @@ form div.form-tags label {
 
     .show-wrapper {
         order: 1;
+    }
+
+    .game-listing-item {
+        min-width: 75%;
     }
 
 }
