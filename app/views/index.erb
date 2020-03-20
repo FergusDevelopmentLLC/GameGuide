@@ -10,8 +10,7 @@
             </div>
             <%end%>
             <div class="latest-description">
-                <h3>Latest game update: <a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a></h3>
-                <h4><strong><%=@latest_game.short_description%></strong></h4>
+                <h3><a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a> - <strong><%=@latest_game.short_description%></strong></h3>
                 <p><%=@latest_game.description%></p>
                 <ul>
                     <li>Type: <a href='/types/<%=@latest_game.type.id%>'><%=@latest_game.type.name%></a></li>
@@ -24,7 +23,7 @@
             </div>
         </div>
         <div class="types-wrapper">
-            <h3>Game Types</h3>
+            <h4><a href='/types'>Game Types</a></h4>
             <div class="types">
                 <%Type.all.each { |type|%>
                 <div class="type">
@@ -47,7 +46,7 @@
     </main>
     <aside class="right">
         <h3>Featured Games</h3>
-       <% @featured.each { |featured| %>
+        <% @featured.each { |featured| %>
             <div class="feature">
                 <a href='/games/<%=featured.id%>'><img src="../../../uploads/<%=featured.image%>"/></a>
                 <div class="feature-desc">
