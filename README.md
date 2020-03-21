@@ -1,10 +1,28 @@
 # GameGuide
 
-Delete user:
-1. Tags that user has assigned should disappear
-2. If another user has assigned the same tag to another game, those tags should not disappear
-3. As a result of user delete, orphaned tags should be deleted
-4. Games that user created should delete
+GamesGuide is a demonstration Ruby/Sinatra web application created to keep track of a board game collection. Users can login, add games, comment on games and tag them.
 
+## Installation
 
-https://makandracards.com/makandra/32175-don-t-forget-automatically-remove-join-records-on-has_many-through-associations
+Clone this repository.
+
+Run:
+
+```
+$ cd GameGuide
+$ bundle install
+$ rake db:migrate 
+$ rake db:seed 
+$ shotgun
+```
+
+There will be one user in the system after seeding with the following credentials. Logging in not required to see the app in action.
+
+```
+username: user
+password: password
+```
+
+## License
+
+GameGuide is licensed under the MIT license. (http://opensource.org/licenses/MIT)
