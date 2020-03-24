@@ -4,11 +4,10 @@
             <div class="flash-message"><%=flash[:message]%></div>
         <% end %>
         <div class="latest-wrapper">
-            <%if @latest_game.image%>
+            <%if @latest_game%>
             <div class="latest-img">
                 <a href='/games/<%=@latest_game.id%>'><img src="../../../uploads/<%=@latest_game.image%>"/></a>
             </div>
-            <%end%>
             <div class="latest-description">
                 <h3>Latest game: <a href='/games/<%=@latest_game.id%>'><%=@latest_game.name%></a></h3>
                 <p><strong><%=@latest_game.short_description%></strong></p>
@@ -20,8 +19,8 @@
                     <%if !@latest_game.tags.empty?%><li>Tags: <%=@latest_game.tag_links%></li><%end%>
                 </ul>
                 <%if !@latest_game.comments.empty?%><p class="latest-comment"><em><%=@latest_game.comments.last.content%></em> - <%=@latest_game.comments.last.user.username%> <%=Time.at(@latest_game.comments.last.updated_at).to_datetime.strftime("%m/%d/%Y")%></p><%end%>
-                
             </div>
+            <%end%>
         </div>
         <div class="types-wrapper">
             <h4><a href='/types'>Game Types</a></h4>

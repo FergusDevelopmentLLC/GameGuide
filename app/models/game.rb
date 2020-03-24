@@ -37,16 +37,17 @@ class Game < ActiveRecord::Base
 
     def self.get_featured_except(excluded)
         featured = Game.where(:featured => 1).order(updated_at: :desc) #get all the current featured
-
-        if featured.include?(excluded) || featured.count < 2 #if the featured count < 2, or featured includes the excluded
-            filtered = featured.reject { |game| game == excluded } #remove the excluded
-            while filtered.count < 2 #add random games until we have 2
-                sample = Game.all.sample
-                if !filtered.include?(sample) && sample != excluded
-                    filtered << sample
+        if Game.all.count > 1 && Game.all.reject { |game| game == excluded }.count > 1 #if there are 2 games in system after rejecting excluded
+            if featured.include?(excluded) || featured.count < 2 #if the featured count < 2, or featured includes the excluded
+                filtered = featured.reject { |game| game == excluded } #remove the excluded
+                while filtered.count < 2 #add random games until we have 2 featured
+                    sample = Game.all.sample
+                    if !filtered.include?(sample) && sample != excluded
+                        filtered << sample
+                    end
                 end
+                featured = filtered
             end
-            featured = filtered
         end
         featured
     end
