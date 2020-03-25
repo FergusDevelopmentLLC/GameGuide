@@ -3,8 +3,8 @@ class Game < ActiveRecord::Base
     belongs_to :type
     has_many :comments, dependent: :destroy
     has_many :game_tag_users, dependent: :destroy
-    has_many :tags, through: :game_tag_users, dependent: :destroy
-
+    has_many :tags, through: :game_tag_users
+    
     validates_presence_of :name
     validates_presence_of :short_description
     validates_presence_of :description
