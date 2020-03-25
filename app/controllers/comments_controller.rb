@@ -1,6 +1,4 @@
-require 'rack-flash'
 class CommentsController < ApplicationController
-    use Rack::Flash
 
     get "/comments/:id/edit" do
         @comment = Comment.find_by(:id => params[:id])

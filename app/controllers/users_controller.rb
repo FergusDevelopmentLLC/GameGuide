@@ -1,7 +1,5 @@
-require 'rack-flash'
 class UsersController < ApplicationController
-    use Rack::Flash
-
+    
     get "/signup" do
         if logged_in?
             flash[:message] = "Please log out in order to sign up with a new account"
@@ -59,7 +57,7 @@ class UsersController < ApplicationController
 
     get "/users/:id/edit" do
         @user = User.find_by(:id => params[:id])
-        if !logged_in? || !can_edit_user?(@user)
+        if !logged_in?
             flash[:message] = "You must be logged in to edit your profile."
             redirect "/"
         else

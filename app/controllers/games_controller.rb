@@ -1,8 +1,5 @@
-require 'rack-flash'
 include FileUtils::Verbose
-
 class GamesController < ApplicationController
-    use Rack::Flash
     
     get "/games" do
         @games = Game.all.order(:name)
