@@ -19,12 +19,12 @@ class GamesController < ApplicationController
     end
 
     get '/games/:id' do
-        @game = Game.find(params[:id])
+        @game = Game.find_by(:id => params[:id])
         erb :'/games/show'
     end
 
     get '/games/:id/edit' do
-        @game = Game.find(params[:id])
+        @game = Game.find_by(:id => params[:id])
 
         if logged_in? && can_edit_game?(@game)
             erb :'/games/edit'
@@ -97,7 +97,7 @@ class GamesController < ApplicationController
 
     patch "/games/:id" do
         
-        @game = Game.find(params[:id])
+        @game = Game.find_by(:id => params[:id])
 
         if logged_in? && can_edit_game?(@game)
 
@@ -191,7 +191,7 @@ class GamesController < ApplicationController
     end
 
     delete '/games/:id' do
-        @game = Game.find(params[:id])
+        @game = Game.find_by(:id => params[:id])
 
         if logged_in? && can_edit_game?(@game)
             @game.destroy
