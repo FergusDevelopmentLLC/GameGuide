@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         end
     end
 
-    post "/signup" do
+    post "/users" do
         @user = User.new(params[:user])
         if @user.valid?
             @user.save
