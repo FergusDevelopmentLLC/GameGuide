@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     use Rack::Flash
 
     get "/comments/:id/edit" do
-        @comment = Comment.find(params[:id])
+        @comment = Comment.find_by(:id => params[:id])
 
         if logged_in? && can_edit_comment?(@comment)
             erb :'comments/edit'
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     post "/comments" do
         if logged_in?
 
-            @game = Game.find(params[:game_id])
+            @game = Game.find_by(:id => params[:game_id])
 
             new_comment = Comment.new(:content => params[:show_new_comment])
             if new_comment.valid?
@@ -37,7 +37,9 @@ class CommentsController < ApplicationController
     end
     
     patch "/comments/:id" do
-        @comment = Comment.find(params[:id])
+        
+        @comment = Comment.find_by(:id => params[:id])
+
         if logged_in? && can_edit_comment?(@comment)
             @comment.update(params[:comment])
             if @comment.valid?
@@ -53,7 +55,9 @@ class CommentsController < ApplicationController
     end
 
     delete "/comments/:id" do
-        @comment = Comment.find(params[:id])
+        
+        @comment = Comment.find_by(:id => params[:id])
+
         if logged_in? && can_edit_comment?(@comment)
             @comment.destroy
             flash[:message] = "Comment deleted."
