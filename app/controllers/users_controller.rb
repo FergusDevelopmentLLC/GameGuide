@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     end
 
     get "/users/:id/edit" do
-        @user = User.find(params[:id])
+        @user = User.find_by(:id => params[:id])
         if !logged_in? || !can_edit_user?(@user)
             flash[:message] = "You must be logged in to edit your profile."
             redirect "/"
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
     end
 
     patch "/users/:id" do
-        @user = User.find(params[:id])
+        @user = User.find_by(:id => params[:id])
         if logged_in? && can_edit_user?(@user)
             @user.username = params[:user][:username]
             @user.email = params[:user][:email]
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
     end
 
     delete "/users/:id" do
-        @user = User.find(params[:id])
+        @user = User.find_by(:id => params[:id])
         if logged_in? && can_edit_user?(@user)
             @user.destroy
             Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy} #delete any orphaned tags as a result
