@@ -8,13 +8,12 @@ class TagsController < ApplicationController
     end
 
     get '/tags/:id' do
-        @tag = Tag.find(params[:id])
+        @tag = Tag.find_by(:id => params[:id])
         erb :'tags/show'
     end
 
     post '/tags' do
-
-        @game = Game.find(params[:game_id])
+        @game = Game.find_by(:id => params[:game_id])
         if logged_in?
             tag = Tag.find_or_create_by(:name => params[:new_tag].downcase)
             if tag.valid?
