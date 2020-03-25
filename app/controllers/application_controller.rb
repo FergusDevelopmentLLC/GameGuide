@@ -24,27 +24,15 @@ class ApplicationController < Sinatra::Base
     end
 
     def can_edit_user?(user)
-      if (current_user.id == user.id)
-          true
-      else
-          false
-      end
+      current_user == user
     end
 
     def can_edit_game?(game)
-      if current_user.id == game.user.id
-        true
-      else
-        false
-      end
+      current_user == game.user
     end
 
     def can_edit_comment?(comment)
-      if current_user.id == comment.user.id
-          true
-      else
-          false
-      end
+      current_user == comment.user
     end
 
   end
