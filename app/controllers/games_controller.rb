@@ -35,13 +35,7 @@ class GamesController < ApplicationController
         if logged_in?
 
             @game = current_user.games.build(params[:game])
-
-            @game.featured = 0
-            
-            if params[:featured]
-                @game.featured = 1
-            end
-
+ 
             if params[:image]
                 tempfile = params[:image][:tempfile] 
                 filename = params[:image][:filename]
@@ -99,13 +93,9 @@ class GamesController < ApplicationController
 
             @game.update(params[:game])
             
-            @game.featured = 0
+            params[:featured] ? @game.featured = 1 : @game.featured = 0
             
-            if params[:featured]
-                @game.featured = 1
-            end
-            
-            if params[:image] && !params[:clear_image] 
+            if params[:image]
                 tempfile = params[:image][:tempfile] 
                 filename = params[:image][:filename]
 
@@ -114,10 +104,6 @@ class GamesController < ApplicationController
                 cp(tempfile.path, "public/uploads/#{image_file}")
 
                 @game.image = image_file
-            end
-
-            if params[:clear_image]
-                @game.image = nil
             end
 
             if @game.valid?
