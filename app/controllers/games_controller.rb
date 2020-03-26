@@ -47,9 +47,7 @@ class GamesController < ApplicationController
                 @game.image = image_file
             end
 
-            if @game.valid?
-            
-                @game.save
+            if @game.save
                 
                 if params[:tag_ids]
                     params[:tag_ids].each {|tag_id|
@@ -106,8 +104,8 @@ class GamesController < ApplicationController
                 @game.image = image_file
             end
 
-            if @game.valid?
-                    
+            if @game.save
+                
                 @game.tags.clear
 
                 if params[:tag_ids]
@@ -131,8 +129,6 @@ class GamesController < ApplicationController
                     end
                 end
 
-                @game.save
-                
                 if @game.featured == 1
                     Game.delete_old_featured
                 end
@@ -141,6 +137,7 @@ class GamesController < ApplicationController
                 Tag.all.find_all {|tag| tag.games.empty?}.each {|tag| tag.destroy}
 
                 flash[:message] = "Game updated successfully."
+                
                 redirect "/games/#{@game.id}"
 
             else
