@@ -7,6 +7,7 @@ class TagsController < ApplicationController
 
     get '/tags/:id' do
         @tag = Tag.find_by(:id => params[:id])
+        @games = @tag.games
         erb :'tags/show'
     end
 
