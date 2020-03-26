@@ -34,9 +34,6 @@ class GamesController < ApplicationController
     post '/games' do
         if logged_in?
 
-            # @game = Game.new(params[:game])
-            # @game.user = current_user
-            
             @game = current_user.games.build(params[:game])
 
             @game.featured = 0
